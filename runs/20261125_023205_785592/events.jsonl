@@ -1,0 +1,5 @@
+{"time":"2026-11-25T02:32:05.785","event":"start","jumps":null,"restart":true,"until_stopped":true}
+{"time":"2026-11-25T02:32:05.919","event":"observe","jump":0,"score":469,"button":null,"scene":{"foot":[376,617],"target":[187,499],"confidence":0.97,"reason":"center disk on upper platform"}}
+{"time":"2026-11-25T02:32:06.591","event":"jump","jump":1,"length":196.7,"direction":-1,"requested":0.6697,"held":0.6702}
+{"time":"2026-11-25T02:32:09.260","event":"observe","jump":1,"score":490,"button":null,"scene":{"foot":[182,600],"target":null,"confidence":0.0,"reason":"ambiguous or decorated platform outline"}}
+{"time":"2026-11-25T02:32:09.261","event":"stop","reason":"uncertain_geometry","scene":{"foot":[182,600],"target":null,"confidence":0.0,"reason":"ambiguous or decorated platform outline"}}

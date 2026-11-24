@@ -1,0 +1,89 @@
+{"time":"2026-11-25T02:29:14.064","event":"start","jumps":null,"restart":true,"until_stopped":true}
+{"time":"2026-11-25T02:29:14.188","event":"observe","jump":0,"score":null,"button":null,"scene":{"foot":[386,620],"target":[174,494],"confidence":0.977,"reason":"top material outline"}}
+{"time":"2026-11-25T02:29:14.901","event":"jump","jump":1,"length":215.1,"direction":-1,"requested":0.7111,"held":0.7112}
+{"time":"2026-11-25T02:29:16.295","event":"observe","jump":1,"score":221,"button":null,"scene":{"foot":[223,586],"target":[336,524],"confidence":0.95,"reason":"top material outline"}}
+{"time":"2026-11-25T02:29:16.530","event":"calibration","jump":1,"actual":220.0,"camera_shift":[57.0,93.0],"correction":-0.0039}
+{"time":"2026-11-25T02:29:16.892","event":"jump","jump":2,"length":110.2,"direction":1,"requested":0.36,"held":0.3606}
+{"time":"2026-11-25T02:29:18.284","event":"observe","jump":2,"score":null,"button":null,"scene":{"foot":[412,630],"target":[159,485],"confidence":0.975,"reason":"top material outline"}}
+{"time":"2026-11-25T02:29:18.295","event":"calibration","jump":2,"actual":108.7,"camera_shift":[72.0,102.0],"correction":-0.0023}
+{"time":"2026-11-25T02:29:19.103","event":"jump","jump":3,"length":252.1,"direction":-1,"requested":0.8067,"held":0.8072}
+{"time":"2026-11-25T02:29:20.507","event":"observe","jump":3,"score":235,"button":null,"scene":{"foot":[176,615],"target":[382,500],"confidence":0.977,"reason":"top material outline"}}
+{"time":"2026-11-25T02:29:20.518","event":"calibration","jump":3,"actual":255.2,"camera_shift":[25.0,129.0],"correction":-0.003}
+{"time":"2026-11-25T02:29:21.199","event":"jump","jump":4,"length":202.6,"direction":1,"requested":0.6792,"held":0.6798}
+{"time":"2026-11-25T02:29:22.596","event":"observe","jump":4,"score":236,"button":null,"scene":{"foot":[229,592],"target":[338,524],"confidence":0.82,"reason":"outer contour and right rim"}}
+{"time":"2026-11-25T02:29:22.607","event":"calibration","jump":4,"actual":210.9,"camera_shift":[-164.4,95.0],"correction":-0.0081}
+{"time":"2026-11-25T02:29:22.975","event":"jump","jump":5,"length":113.4,"direction":1,"requested":0.3663,"held":0.3666}
+{"time":"2026-11-25T02:29:24.378","event":"observe","jump":5,"score":null,"button":null,"scene":{"foot":[358,615],"target":[198,508],"confidence":0.977,"reason":"top material outline"}}
+{"time":"2026-11-25T02:29:24.388","event":"calibration","jump":5,"actual":109.8,"camera_shift":[19.2,86.4],"correction":-0.0045}
+{"time":"2026-11-25T02:29:24.957","event":"jump","jump":6,"length":172.7,"direction":-1,"requested":0.5666,"held":0.5671}
+{"time":"2026-11-25T02:29:26.355","event":"observe","jump":6,"score":239,"button":null,"scene":{"foot":[146,633],"target":[415,481],"confidence":0.974,"reason":"top material outline"}}
+{"time":"2026-11-25T02:29:26.366","event":"calibration","jump":6,"actual":175.2,"camera_shift":[-47.0,125.0],"correction":-0.0072}
+{"time":"2026-11-25T02:29:27.183","event":"jump","jump":7,"length":266.1,"direction":1,"requested":0.8147,"held":0.8154}
+{"time":"2026-11-25T02:29:28.585","event":"observe","jump":7,"score":243,"button":null,"scene":{"foot":[192,613],"target":[369,507],"confidence":0.98,"reason":"top material outline"}}
+{"time":"2026-11-25T02:29:28.596","event":"calibration","jump":7,"actual":256.6,"camera_shift":[-216.0,125.0],"correction":-0.0044}
+{"time":"2026-11-25T02:29:29.206","event":"jump","jump":8,"length":180.3,"direction":1,"requested":0.6087,"held":0.6094}
+{"time":"2026-11-25T02:29:30.611","event":"observe","jump":8,"score":244,"button":null,"scene":{"foot":[414,623],"target":[164,488],"confidence":0.973,"reason":"top material outline"}}
+{"time":"2026-11-25T02:29:31.402","event":"jump","jump":9,"length":241.9,"direction":-1,"requested":0.7791,"held":0.7796}
+{"time":"2026-11-25T02:29:32.801","event":"observe","jump":9,"score":245,"button":null,"scene":{"foot":[157,624],"target":[400,490],"confidence":0.973,"reason":"top material outline"}}
+{"time":"2026-11-25T02:29:33.579","event":"jump","jump":10,"length":237.5,"direction":1,"requested":0.7673,"held":0.7675}
+{"time":"2026-11-25T02:29:34.980","event":"observe","jump":10,"score":246,"button":null,"scene":{"foot":[248,581],"target":[338,524],"confidence":0.955,"reason":"top material outline"}}
+{"time":"2026-11-25T02:29:35.302","event":"jump","jump":11,"length":94.4,"direction":1,"requested":0.3105,"held":0.3108}
+{"time":"2026-11-25T02:29:37.971","event":"observe","jump":11,"score":247,"button":null,"scene":{"foot":[229,592],"target":[353,517],"confidence":0.82,"reason":"outer contour and right rim"}}
+{"time":"2026-11-25T02:29:37.981","event":"calibration","jump":11,"actual":95.4,"camera_shift":[-114.5,66.0],"correction":-0.0052}
+{"time":"2026-11-25T02:29:38.397","event":"jump","jump":12,"length":127.0,"direction":1,"requested":0.4138,"held":0.414}
+{"time":"2026-11-25T02:29:39.794","event":"observe","jump":12,"score":249,"button":null,"scene":{"foot":[366,608],"target":[200,510],"confidence":0.977,"reason":"top material outline"}}
+{"time":"2026-11-25T02:29:39.804","event":"calibration","jump":12,"actual":124.9,"camera_shift":[12.0,88.0],"correction":-0.003}
+{"time":"2026-11-25T02:29:40.356","event":"jump","jump":13,"length":167.9,"direction":-1,"requested":0.5495,"held":0.5497}
+{"time":"2026-11-25T02:29:41.761","event":"observe","jump":13,"score":253,"button":null,"scene":{"foot":[330,588],"target":[231,526],"confidence":0.974,"reason":"top material outline"}}
+{"time":"2026-11-25T02:29:41.772","event":"calibration","jump":13,"actual":170.1,"camera_shift":[134.8,77.8],"correction":-0.0055}
+{"time":"2026-11-25T02:29:42.109","event":"jump","jump":14,"length":103.2,"direction":-1,"requested":0.3354,"held":0.3356}
+{"time":"2026-11-25T02:29:43.513","event":"observe","jump":14,"score":259,"button":null,"scene":{"foot":[218,594],"target":[360,509],"confidence":0.945,"reason":"top material outline"}}
+{"time":"2026-11-25T02:29:43.523","event":"calibration","jump":14,"actual":102.9,"camera_shift":[-8.4,65.0],"correction":-0.0051}
+{"time":"2026-11-25T02:29:43.997","event":"jump","jump":15,"length":144.6,"direction":1,"requested":0.4717,"held":0.4721}
+{"time":"2026-11-25T02:29:45.395","event":"observe","jump":15,"score":260,"button":null,"scene":{"foot":[380,594],"target":[206,512],"confidence":0.973,"reason":"top material outline"}}
+{"time":"2026-11-25T02:29:45.406","event":"calibration","jump":15,"actual":141.7,"camera_shift":[15.8,79.2],"correction":-0.0022}
+{"time":"2026-11-25T02:29:45.922","event":"jump","jump":16,"length":158.0,"direction":-1,"requested":0.514,"held":0.5144}
+{"time":"2026-11-25T02:29:47.320","event":"observe","jump":16,"score":262,"button":null,"scene":{"foot":[356,604],"target":[206,512],"confidence":0.976,"reason":"top material outline"}}
+{"time":"2026-11-25T02:29:47.330","event":"calibration","jump":16,"actual":157.3,"camera_shift":[153.8,89.0],"correction":-0.0014}
+{"time":"2026-11-25T02:29:47.837","event":"jump","jump":17,"length":154.7,"direction":-1,"requested":0.5049,"held":0.5051}
+{"time":"2026-11-25T02:29:49.234","event":"observe","jump":17,"score":266,"button":null,"scene":{"foot":[396,627],"target":[166,489],"confidence":0.972,"reason":"top material outline"}}
+{"time":"2026-11-25T02:29:50.008","event":"jump","jump":18,"length":234.5,"direction":-1,"requested":0.762,"held":0.7625}
+{"time":"2026-11-25T02:29:51.406","event":"observe","jump":18,"score":null,"button":null,"scene":{"foot":[339,594],"target":[217,518],"confidence":0.974,"reason":"top material outline"}}
+{"time":"2026-11-25T02:29:51.835","event":"jump","jump":19,"length":126.8,"direction":-1,"requested":0.4171,"held":0.4176}
+{"time":"2026-11-25T02:29:53.235","event":"observe","jump":19,"score":269,"button":null,"scene":{"foot":[177,619],"target":[386,497],"confidence":0.82,"reason":"outer contour and right rim"}}
+{"time":"2026-11-25T02:29:53.944","event":"jump","jump":20,"length":210.2,"direction":1,"requested":0.6968,"held":0.6971}
+{"time":"2026-11-25T02:29:55.348","event":"observe","jump":20,"score":null,"button":null,"scene":{"foot":[202,608],"target":[374,504],"confidence":0.97,"reason":"top material outline"}}
+{"time":"2026-11-25T02:29:55.942","event":"jump","jump":21,"length":176.1,"direction":1,"requested":0.583,"held":0.5835}
+{"time":"2026-11-25T02:29:57.346","event":"observe","jump":21,"score":null,"button":null,"scene":{"foot":[184,618],"target":[391,495],"confidence":0.977,"reason":"top material outline"}}
+{"time":"2026-11-25T02:29:57.359","event":"calibration","jump":21,"actual":180.1,"camera_shift":[-198.0,114.0],"correction":-0.0094}
+{"time":"2026-11-25T02:29:58.049","event":"jump","jump":22,"length":210.0,"direction":1,"requested":0.6885,"held":0.6891}
+{"time":"2026-11-25T02:29:59.451","event":"observe","jump":22,"score":null,"button":null,"scene":{"foot":[418,632],"target":[153,482],"confidence":0.977,"reason":"top material outline"}}
+{"time":"2026-11-25T02:29:59.462","event":"calibration","jump":22,"actual":212.4,"camera_shift":[22.0,136.9],"correction":-0.011}
+{"time":"2026-11-25T02:30:00.271","event":"jump","jump":23,"length":262.4,"direction":-1,"requested":0.8075,"held":0.808}
+{"time":"2026-11-25T02:30:01.675","event":"observe","jump":23,"score":null,"button":null,"scene":{"foot":[152,640],"target":[417,480],"confidence":0.978,"reason":"top material outline"}}
+{"time":"2026-11-25T02:30:02.502","event":"jump","jump":24,"length":271.1,"direction":1,"requested":0.8155,"held":0.8161}
+{"time":"2026-11-25T02:30:03.901","event":"observe","jump":24,"score":null,"button":null,"scene":{"foot":[378,626],"target":[179,497],"confidence":0.975,"reason":"top material outline"}}
+{"time":"2026-11-25T02:30:04.602","event":"jump","jump":25,"length":211.2,"direction":-1,"requested":0.6896,"held":0.6898}
+{"time":"2026-11-25T02:30:05.999","event":"observe","jump":25,"score":280,"button":null,"scene":{"foot":[378,615],"target":[184,500],"confidence":0.977,"reason":"top material outline"}}
+{"time":"2026-11-25T02:30:06.009","event":"calibration","jump":25,"actual":212.9,"camera_shift":[203.1,117.6],"correction":-0.0123}
+{"time":"2026-11-25T02:30:06.671","event":"jump","jump":26,"length":196.6,"direction":-1,"requested":0.6572,"held":0.6605}
+{"time":"2026-11-25T02:30:08.068","event":"observe","jump":26,"score":281,"button":null,"scene":{"foot":[366,609],"target":[190,503],"confidence":0.977,"reason":"top material outline"}}
+{"time":"2026-11-25T02:30:08.678","event":"jump","jump":27,"length":179.8,"direction":-1,"requested":0.5974,"held":0.5981}
+{"time":"2026-11-25T02:30:10.085","event":"observe","jump":27,"score":null,"button":null,"scene":{"foot":[203,598],"target":[354,516],"confidence":0.977,"reason":"top material outline"}}
+{"time":"2026-11-25T02:30:10.566","event":"jump","jump":28,"length":146.5,"direction":1,"requested":0.4701,"held":0.4705}
+{"time":"2026-11-25T02:30:11.970","event":"observe","jump":28,"score":null,"button":null,"scene":{"foot":[170,626],"target":[394,493],"confidence":0.978,"reason":"top material outline"}}
+{"time":"2026-11-25T02:30:12.713","event":"jump","jump":29,"length":227.2,"direction":1,"requested":0.7314,"held":0.732}
+{"time":"2026-11-25T02:30:14.116","event":"observe","jump":29,"score":null,"button":null,"scene":{"foot":[374,604],"target":[200,508],"confidence":0.82,"reason":"outer contour and right rim"}}
+{"time":"2026-11-25T02:30:14.677","event":"jump","jump":30,"length":170.1,"direction":-1,"requested":0.549,"held":0.5494}
+{"time":"2026-11-25T02:30:16.079","event":"observe","jump":30,"score":null,"button":null,"scene":{"foot":[330,588],"target":[232,526],"confidence":0.977,"reason":"top material outline"}}
+{"time":"2026-11-25T02:30:16.091","event":"calibration","jump":30,"actual":170.3,"camera_shift":[134.4,77.7],"correction":-0.0124}
+{"time":"2026-11-25T02:30:16.421","event":"jump","jump":31,"length":102.7,"direction":-1,"requested":0.3269,"held":0.3272}
+{"time":"2026-11-25T02:30:17.821","event":"observe","jump":31,"score":null,"button":null,"scene":{"foot":[384,619],"target":[181,498],"confidence":0.976,"reason":"top material outline"}}
+{"time":"2026-11-25T02:30:17.831","event":"calibration","jump":31,"actual":100.2,"camera_shift":[154.0,89.0],"correction":-0.0101}
+{"time":"2026-11-25T02:30:18.513","event":"jump","jump":32,"length":206.3,"direction":-1,"requested":0.6799,"held":0.6806}
+{"time":"2026-11-25T02:30:19.914","event":"observe","jump":32,"score":null,"button":null,"scene":{"foot":[394,625],"target":[162,487],"confidence":0.973,"reason":"top material outline"}}
+{"time":"2026-11-25T02:30:20.682","event":"jump","jump":33,"length":235.5,"direction":-1,"requested":0.7561,"held":0.7566}
+{"time":"2026-11-25T02:30:22.074","event":"observe","jump":33,"score":null,"button":null,"scene":{"foot":[212,593],"target":[346,519],"confidence":0.82,"reason":"outer contour and right rim"}}
+{"time":"2026-11-25T02:30:22.507","event":"jump","jump":34,"length":131.1,"direction":1,"requested":0.4225,"held":0.4226}
+{"time":"2026-11-25T02:30:25.181","event":"observe","jump":34,"score":null,"button":null,"scene":{"foot":[156,634],"target":null,"confidence":0.0,"reason":"ambiguous or decorated platform outline"}}
+{"time":"2026-11-25T02:30:25.181","event":"stop","reason":"uncertain_geometry","scene":{"foot":[156,634],"target":null,"confidence":0.0,"reason":"ambiguous or decorated platform outline"}}

@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.venv/
+/current.png
+/recent/
+/last_*.png
+/last_jump_failure.zip
+/runs/*
+trainer.lock
+*.sqlite3-journal
+*.sqlite3-wal
+*.sqlite3-shm
+*.tmp

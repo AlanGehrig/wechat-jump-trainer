@@ -1,0 +1,2189 @@
+{
+ "summary": {
+  "train": {
+   "n": 69,
+   "marks": 41,
+   "accepted_marks": 41,
+   "false_positive": 0,
+   "no_mark": 28,
+   "old_px": {
+    "n": 41,
+    "mean": 3.497,
+    "p50": 2.601,
+    "p95": 13.669,
+    "max": 16.777
+   },
+   "refined_px": {
+    "n": 41,
+    "mean": 0.108,
+    "p50": 0.1,
+    "p95": 0.289,
+    "max": 0.38
+   },
+   "end_to_end_ms": {
+    "n": 69,
+    "mean": 3.688,
+    "p50": 3.517,
+    "p95": 5.12,
+    "max": 5.642
+   },
+   "old_short_px": {
+    "n": 6,
+    "mean": 3.125,
+    "p50": 2.356,
+    "p95": 6.987,
+    "max": 7.733
+   },
+   "refined_short_px": {
+    "n": 6,
+    "mean": 0.145,
+    "p50": 0.109,
+    "p95": 0.315,
+    "max": 0.38
+   }
+  },
+  "dev": {
+   "n": 32,
+   "marks": 21,
+   "accepted_marks": 21,
+   "false_positive": 0,
+   "no_mark": 11,
+   "old_px": {
+    "n": 21,
+    "mean": 3.486,
+    "p50": 2.38,
+    "p95": 5.786,
+    "max": 24.901
+   },
+   "refined_px": {
+    "n": 21,
+    "mean": 0.096,
+    "p50": 0.094,
+    "p95": 0.153,
+    "max": 0.286
+   },
+   "end_to_end_ms": {
+    "n": 32,
+    "mean": 3.681,
+    "p50": 3.51,
+    "p95": 5.116,
+    "max": 5.555
+   },
+   "old_short_px": {
+    "n": 4,
+    "mean": 1.647,
+    "p50": 2.054,
+    "p95": 2.34,
+    "max": 2.38
+   },
+   "refined_short_px": {
+    "n": 4,
+    "mean": 0.08,
+    "p50": 0.068,
+    "p95": 0.122,
+    "max": 0.129
+   }
+  },
+  "prototype": [
+   245.0,
+   245.0,
+   245.0
+  ],
+  "threshold": 3.0
+ },
+ "details": {
+  "train": [
+   {
+    "id": "v0001",
+    "batch": "历史",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     212,
+     516
+    ],
+    "ref": [
+     211.886,
+     513.402
+    ],
+    "center": [
+     211.95361920073628,
+     513.2961991429329
+    ],
+    "score": 12.077,
+    "old_error": 2.6004999519322767,
+    "new_error": 0.1255634407953142,
+    "ms": 3.59
+   },
+   {
+    "id": "v0002",
+    "batch": "历史",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     356,
+     515
+    ],
+    "ref": [
+     355.636,
+     512.178
+    ],
+    "center": [
+     355.73605981469154,
+     512.1559434235096
+    ],
+    "score": 10.658,
+    "old_error": 2.8453787094163756,
+    "new_error": 0.10246198847659586,
+    "ms": 3.513
+   },
+   {
+    "id": "v0003",
+    "batch": "历史",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     193,
+     509
+    ],
+    "ref": [
+     206.612,
+     510.248
+    ],
+    "center": [
+     206.72666436433792,
+     510.22935596108437
+    ],
+    "score": 11.063,
+    "old_error": 13.669090971970295,
+    "new_error": 0.1161702054578025,
+    "ms": 4.244
+   },
+   {
+    "id": "v0004",
+    "batch": "历史",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     342,
+     520
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 5.642
+   },
+   {
+    "id": "v0005",
+    "batch": "历史",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     186,
+     502
+    ],
+    "ref": [
+     186.214,
+     498.664
+    ],
+    "center": [
+     186.10788374394178,
+     498.71171963214874
+    ],
+    "score": 11.492,
+    "old_error": 3.3428568620268626,
+    "new_error": 0.11635215121442802,
+    "ms": 3.651
+   },
+   {
+    "id": "v0006",
+    "batch": "历史",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     211,
+     511
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.515
+   },
+   {
+    "id": "v0007",
+    "batch": "历史",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     426,
+     474
+    ],
+    "ref": [
+     426.205,
+     471.629
+    ],
+    "center": [
+     426.1065461784601,
+     471.7079519033432
+    ],
+    "score": 11.929,
+    "old_error": 2.379845793323572,
+    "new_error": 0.1262004675796182,
+    "ms": 3.595
+   },
+   {
+    "id": "v0008",
+    "batch": "历史",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     181,
+     498
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.45
+   },
+   {
+    "id": "v0009",
+    "batch": "历史",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     160,
+     484
+    ],
+    "ref": [
+     160.397,
+     483.985
+    ],
+    "center": [
+     160.3018597662449,
+     483.97504652664065
+    ],
+    "score": 14.699,
+    "old_error": 0.39728327425150023,
+    "new_error": 0.09565947789367836,
+    "ms": 3.6
+   },
+   {
+    "id": "v0010",
+    "batch": "历史",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     148,
+     479
+    ],
+    "ref": [
+     147.45,
+     476.084
+    ],
+    "center": [
+     147.46178537607193,
+     476.04339142143726
+    ],
+    "score": 11.158,
+    "old_error": 2.9674157106816015,
+    "new_error": 0.04228417838912432,
+    "ms": 3.676
+   },
+   {
+    "id": "v0011",
+    "batch": "历史",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     342,
+     522
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.532
+   },
+   {
+    "id": "v0012",
+    "batch": "历史",
+    "visible": true,
+    "accepted": true,
+    "short": true,
+    "start": [
+     232,
+     526
+    ],
+    "ref": [
+     231.207,
+     525.0
+    ],
+    "center": [
+     231.3279418349266,
+     524.9935114048421
+    ],
+    "score": 13.935,
+    "old_error": 1.2762636874878208,
+    "new_error": 0.12111576818291825,
+    "ms": 3.674
+   },
+   {
+    "id": "v0013",
+    "batch": "历史",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     374,
+     508
+    ],
+    "ref": [
+     361.55,
+     508.916
+    ],
+    "center": [
+     361.4783614873886,
+     508.9603810608387
+    ],
+    "score": 11.459,
+    "old_error": 12.483651549126149,
+    "new_error": 0.08427191139604231,
+    "ms": 3.607
+   },
+   {
+    "id": "v0014",
+    "batch": "历史",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     168,
+     464
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.334
+   },
+   {
+    "id": "v0015",
+    "batch": "历史",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     167,
+     490
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.522
+   },
+   {
+    "id": "v0016",
+    "batch": "历史",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     198,
+     508
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.45
+   },
+   {
+    "id": "v0017",
+    "batch": "历史",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     196,
+     506
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.551
+   },
+   {
+    "id": "v0018",
+    "batch": "历史",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     153,
+     482
+    ],
+    "ref": [
+     152.791,
+     479.264
+    ],
+    "center": [
+     152.8933836221695,
+     479.29981556534767
+    ],
+    "score": 10.616,
+    "old_error": 2.7439710275438305,
+    "new_error": 0.10846732600059382,
+    "ms": 3.649
+   },
+   {
+    "id": "v0019",
+    "batch": "历史",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     204,
+     511
+    ],
+    "ref": [
+     203.174,
+     508.787
+    ],
+    "center": [
+     203.18967480957508,
+     508.882999740541
+    ],
+    "score": 18.057,
+    "old_error": 2.3621272192665845,
+    "new_error": 0.09727101232718229,
+    "ms": 3.592
+   },
+   {
+    "id": "v0020",
+    "batch": "历史",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     154,
+     482
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.509
+   },
+   {
+    "id": "v0021",
+    "batch": "历史",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     213,
+     514
+    ],
+    "ref": [
+     213.221,
+     514.069
+    ],
+    "center": [
+     213.1613486111164,
+     514.0240250434726
+    ],
+    "score": 11.947,
+    "old_error": 0.23152105735763234,
+    "new_error": 0.07470632443358083,
+    "ms": 3.676
+   },
+   {
+    "id": "v0022",
+    "batch": "历史",
+    "visible": false,
+    "accepted": false,
+    "short": true,
+    "start": [
+     212,
+     516
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.522
+   },
+   {
+    "id": "v0023",
+    "batch": "历史",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     356,
+     514
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.499
+   },
+   {
+    "id": "v0024",
+    "batch": "历史",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     381,
+     468
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.592
+   },
+   {
+    "id": "v0025",
+    "batch": "历史",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     174,
+     494
+    ],
+    "ref": [
+     173.817,
+     491.405
+    ],
+    "center": [
+     173.91310341656208,
+     491.3890602886677
+    ],
+    "score": 11.912,
+    "old_error": 2.6014445986797683,
+    "new_error": 0.09741632857103683,
+    "ms": 3.613
+   },
+   {
+    "id": "v0026",
+    "batch": "历史",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     387,
+     497
+    ],
+    "ref": [
+     386.282,
+     494.878
+    ],
+    "center": [
+     386.29156842827797,
+     494.98532751295716
+    ],
+    "score": 17.35,
+    "old_error": 2.2401803498825905,
+    "new_error": 0.1077531895457505,
+    "ms": 3.462
+   },
+   {
+    "id": "v0027",
+    "batch": "历史",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     144,
+     478
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.517
+   },
+   {
+    "id": "v0028",
+    "batch": "历史",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     400,
+     490
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.529
+   },
+   {
+    "id": "v0029",
+    "batch": "历史",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     208,
+     514
+    ],
+    "ref": [
+     208.192,
+     511.185
+    ],
+    "center": [
+     208.13470441102982,
+     511.1350442916155
+    ],
+    "score": 11.543,
+    "old_error": 2.8215401822408963,
+    "new_error": 0.07601550707349097,
+    "ms": 3.586
+   },
+   {
+    "id": "v0030",
+    "batch": "历史",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     168,
+     490
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.512
+   },
+   {
+    "id": "v0031",
+    "batch": "历史",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     112,
+     456
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.305
+   },
+   {
+    "id": "v0032",
+    "batch": "历史",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     410,
+     481
+    ],
+    "ref": [
+     409.871,
+     481.307
+    ],
+    "center": [
+     409.86548368632793,
+     481.0177812743932
+    ],
+    "score": 15.423,
+    "old_error": 0.33300150149813884,
+    "new_error": 0.2892713275769979,
+    "ms": 3.453
+   },
+   {
+    "id": "v0033",
+    "batch": "历史",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     187,
+     499
+    ],
+    "ref": [
+     187.455,
+     499.476
+    ],
+    "center": [
+     187.3711733520031,
+     499.1558031141758
+    ],
+    "score": 15.195,
+    "old_error": 0.6584838646466673,
+    "new_error": 0.3309878435923533,
+    "ms": 3.49
+   },
+   {
+    "id": "v0034",
+    "batch": "历史",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     367,
+     508
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.465
+   },
+   {
+    "id": "v0035",
+    "batch": "历史",
+    "visible": true,
+    "accepted": true,
+    "short": true,
+    "start": [
+     329,
+     528
+    ],
+    "ref": [
+     328.767,
+     527.845
+    ],
+    "center": [
+     328.79065035283566,
+     527.916646540165
+    ],
+    "score": 11.128,
+    "old_error": 0.27984638643368875,
+    "new_error": 0.07544909480474041,
+    "ms": 3.539
+   },
+   {
+    "id": "v0036",
+    "batch": "历史",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     341,
+     526
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.482
+   },
+   {
+    "id": "v0037",
+    "batch": "历史",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     345,
+     521
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.382
+   },
+   {
+    "id": "v0038",
+    "batch": "历史",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     375,
+     504
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.403
+   },
+   {
+    "id": "v0039",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": true,
+    "start": [
+     330,
+     532
+    ],
+    "ref": [
+     329.542,
+     527.275
+    ],
+    "center": [
+     329.61265444755554,
+     527.2440610229969
+    ],
+    "score": 11.104,
+    "old_error": 4.747145352735709,
+    "new_error": 0.0771315192212588,
+    "ms": 3.432
+   },
+   {
+    "id": "v0040",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     179,
+     494
+    ],
+    "ref": [
+     178.791,
+     494.264
+    ],
+    "center": [
+     178.89177956432104,
+     494.31766051054
+    ],
+    "score": 11.179,
+    "old_error": 0.3367150130303171,
+    "new_error": 0.11417517670734212,
+    "ms": 3.415
+   },
+   {
+    "id": "v0041",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     386,
+     498
+    ],
+    "ref": [
+     385.45,
+     495.084
+    ],
+    "center": [
+     385.4524341225624,
+     495.04737892746925
+    ],
+    "score": 11.084,
+    "old_error": 2.9674157106816015,
+    "new_error": 0.0367018787795844,
+    "ms": 3.334
+   },
+   {
+    "id": "v0042",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     353,
+     517
+    ],
+    "ref": [
+     352.5,
+     514.061
+    ],
+    "center": [
+     352.47192844748497,
+     514.0239278133959
+    ],
+    "score": 11.457,
+    "old_error": 2.9812281026449137,
+    "new_error": 0.04650117289078902,
+    "ms": 3.431
+   },
+   {
+    "id": "v0043",
+    "batch": "A",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     168,
+     490
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.406
+   },
+   {
+    "id": "v0044",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     361,
+     509
+    ],
+    "ref": [
+     361.5,
+     509.0
+    ],
+    "center": [
+     361.4728619158268,
+     509.00355520960875
+    ],
+    "score": 11.46,
+    "old_error": 0.5,
+    "new_error": 0.027369967627930487,
+    "ms": 3.599
+   },
+   {
+    "id": "v0045",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     354,
+     518
+    ],
+    "ref": [
+     337.847,
+     522.534
+    ],
+    "center": [
+     337.9030786976218,
+     522.51352840662
+    ],
+    "score": 9.772,
+    "old_error": 16.777263334644317,
+    "new_error": 0.05969846281502317,
+    "ms": 3.498
+   },
+   {
+    "id": "v0046",
+    "batch": "A",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     414,
+     480
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 5.325
+   },
+   {
+    "id": "v0047",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     448,
+     462
+    ],
+    "ref": [
+     447.315,
+     459.308
+    ],
+    "center": [
+     447.20508256554604,
+     459.3547494709492
+    ],
+    "score": 11.023,
+    "old_error": 2.777784908879743,
+    "new_error": 0.11944603564358791,
+    "ms": 4.306
+   },
+   {
+    "id": "v0048",
+    "batch": "A",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     217,
+     518
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.45
+   },
+   {
+    "id": "v0049",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     402,
+     488
+    ],
+    "ref": [
+     401.855,
+     485.656
+    ],
+    "center": [
+     401.92138370871544,
+     485.7306954562664
+    ],
+    "score": 11.504,
+    "old_error": 2.3484805726256215,
+    "new_error": 0.09993101605437166,
+    "ms": 3.541
+   },
+   {
+    "id": "v0050",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": true,
+    "start": [
+     328,
+     531
+    ],
+    "ref": [
+     327.791,
+     528.264
+    ],
+    "center": [
+     327.8929304406047,
+     528.3067039847374
+    ],
+    "score": 10.63,
+    "old_error": 2.7439710275438305,
+    "new_error": 0.11051445622323415,
+    "ms": 3.868
+   },
+   {
+    "id": "v0051",
+    "batch": "A",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     133,
+     470
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.485
+   },
+   {
+    "id": "v0052",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     202,
+     509
+    ],
+    "ref": [
+     215.311,
+     515.628
+    ],
+    "center": [
+     215.2532431781292,
+     515.7477017939091
+    ],
+    "score": 8.787,
+    "old_error": 14.869872393534544,
+    "new_error": 0.13290737352628898,
+    "ms": 5.496
+   },
+   {
+    "id": "v0053",
+    "batch": "A",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     124,
+     465
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 5.307
+   },
+   {
+    "id": "v0054",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     112,
+     458
+    ],
+    "ref": [
+     111.192,
+     455.185
+    ],
+    "center": [
+     111.13530839979649,
+     455.13372652232647
+    ],
+    "score": 11.066,
+    "old_error": 2.928666761514529,
+    "new_error": 0.07643891055197323,
+    "ms": 3.499
+   },
+   {
+    "id": "v0055",
+    "batch": "A",
+    "visible": false,
+    "accepted": false,
+    "short": true,
+    "start": [
+     232,
+     528
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.404
+   },
+   {
+    "id": "v0056",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     190,
+     503
+    ],
+    "ref": [
+     189.729,
+     500.721
+    ],
+    "center": [
+     189.84752050042152,
+     500.72872096300125
+    ],
+    "score": 10.569,
+    "old_error": 2.295055990602403,
+    "new_error": 0.1187717234438902,
+    "ms": 3.53
+   },
+   {
+    "id": "v0057",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     165,
+     489
+    ],
+    "ref": [
+     164.615,
+     486.092
+    ],
+    "center": [
+     164.64859327673912,
+     486.05102602019906
+    ],
+    "score": 11.478,
+    "old_error": 2.9333750186432153,
+    "new_error": 0.05298467007349445,
+    "ms": 3.553
+   },
+   {
+    "id": "v0058",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     378,
+     501
+    ],
+    "ref": [
+     378.568,
+     499.0
+    ],
+    "center": [
+     378.54958057403564,
+     499.00904030911624
+    ],
+    "score": 12.222,
+    "old_error": 2.0790921095516626,
+    "new_error": 0.02051834403096457,
+    "ms": 3.457
+   },
+   {
+    "id": "v0060",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     187,
+     502
+    ],
+    "ref": [
+     186.55,
+     498.916
+    ],
+    "center": [
+     186.47747483849525,
+     498.9617034457624
+    ],
+    "score": 11.0,
+    "old_error": 3.116657825299404,
+    "new_error": 0.0857245822728091,
+    "ms": 3.499
+   },
+   {
+    "id": "v0061",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     389,
+     496
+    ],
+    "ref": [
+     388.594,
+     493.148
+    ],
+    "center": [
+     388.65769386291504,
+     493.1291016936302
+    ],
+    "score": 10.194,
+    "old_error": 2.8807533736854087,
+    "new_error": 0.06643834853973715,
+    "ms": 3.511
+   },
+   {
+    "id": "v0062",
+    "batch": "A",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     382,
+     499
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.378
+   },
+   {
+    "id": "v0063",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": true,
+    "start": [
+     238,
+     528
+    ],
+    "ref": [
+     244.289,
+     532.5
+    ],
+    "center": [
+     244.2311016470194,
+     532.1249297633767
+    ],
+    "score": 17.193,
+    "old_error": 7.733144315218735,
+    "new_error": 0.3795127160959365,
+    "ms": 3.483
+   },
+   {
+    "id": "v0064",
+    "batch": "A",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     154,
+     482
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 4.753
+   },
+   {
+    "id": "v0065",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     399,
+     488
+    ],
+    "ref": [
+     398.759,
+     487.534
+    ],
+    "center": [
+     398.8589927107096,
+     487.5303864181042
+    ],
+    "score": 12.259,
+    "old_error": 0.5246303460532955,
+    "new_error": 0.10005798403507343,
+    "ms": 3.495
+   },
+   {
+    "id": "v0066",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     200,
+     509
+    ],
+    "ref": [
+     200.046,
+     506.595
+    ],
+    "center": [
+     200.01291269715875,
+     506.62636625766754
+    ],
+    "score": 11.737,
+    "old_error": 2.40543987661298,
+    "new_error": 0.04559179453994674,
+    "ms": 3.373
+   },
+   {
+    "id": "v0067",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     388,
+     496
+    ],
+    "ref": [
+     388.5,
+     493.303
+    ],
+    "center": [
+     388.52954646945,
+     493.2861206829548
+    ],
+    "score": 11.083,
+    "old_error": 2.742956251929661,
+    "new_error": 0.034028006125429805,
+    "ms": 4.839
+   },
+   {
+    "id": "v0068",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": true,
+    "start": [
+     230,
+     526
+    ],
+    "ref": [
+     230.566,
+     524.116
+    ],
+    "center": [
+     230.671848654747,
+     524.0946709737182
+    ],
+    "score": 9.629,
+    "old_error": 1.967183773824921,
+    "new_error": 0.10797622457690198,
+    "ms": 3.688
+   },
+   {
+    "id": "v0069",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     402,
+     488
+    ],
+    "ref": [
+     402.098,
+     485.564
+    ],
+    "center": [
+     402.02356781065464,
+     485.7048467993736
+    ],
+    "score": 12.381,
+    "old_error": 2.437970467417499,
+    "new_error": 0.1593046506054801,
+    "ms": 3.487
+   },
+   {
+    "id": "v0070",
+    "batch": "A",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     379,
+     501
+    ],
+    "ref": [
+     379.028,
+     498.972
+    ],
+    "center": [
+     379.18340542912483,
+     498.99941041786224
+    ],
+    "score": 17.617,
+    "old_error": 2.0281932846748316,
+    "new_error": 0.15780424078221258,
+    "ms": 3.704
+   }
+  ],
+  "dev": [
+   {
+    "id": "v0071",
+    "batch": "B",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     221,
+     521
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.757
+   },
+   {
+    "id": "v0072",
+    "batch": "B",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     179,
+     497
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.625
+   },
+   {
+    "id": "v0073",
+    "batch": "B",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     420,
+     478
+    ],
+    "ref": [
+     419.791,
+     475.264
+    ],
+    "center": [
+     419.8932132050395,
+     475.2986879646778
+    ],
+    "score": 10.588,
+    "old_error": 2.7439710275438305,
+    "new_error": 0.10793884462016494,
+    "ms": 3.704
+   },
+   {
+    "id": "v0074",
+    "batch": "B",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     161,
+     486
+    ],
+    "ref": [
+     160.935,
+     484.024
+    ],
+    "center": [
+     161.05027140304446,
+     483.99648700328544
+    ],
+    "score": 17.482,
+    "old_error": 1.9770687899008461,
+    "new_error": 0.11850933021519397,
+    "ms": 3.529
+   },
+   {
+    "id": "v0075",
+    "batch": "B",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     139,
+     474
+    ],
+    "ref": [
+     139.267,
+     471.641
+    ],
+    "center": [
+     139.17957112193108,
+     471.7026963829994
+    ],
+    "score": 11.452,
+    "old_error": 2.3740619200012256,
+    "new_error": 0.10700585215584606,
+    "ms": 3.372
+   },
+   {
+    "id": "v0076",
+    "batch": "B",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     432,
+     470
+    ],
+    "ref": [
+     432.5,
+     468.0
+    ],
+    "center": [
+     432.4775558114052,
+     468.0006921054446
+    ],
+    "score": 11.87,
+    "old_error": 2.0615528128088303,
+    "new_error": 0.022454857194518688,
+    "ms": 3.552
+   },
+   {
+    "id": "v0077",
+    "batch": "B",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     133,
+     470
+    ],
+    "ref": [
+     132.887,
+     467.994
+    ],
+    "center": [
+     132.73441416025162,
+     467.9958815719001
+    ],
+    "score": 17.141,
+    "old_error": 2.0091801810688574,
+    "new_error": 0.1525974403603624,
+    "ms": 3.459
+   },
+   {
+    "id": "v0078",
+    "batch": "B",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     378,
+     502
+    ],
+    "ref": [
+     378.233,
+     499.155
+    ],
+    "center": [
+     378.20189785957336,
+     499.1229241192341
+    ],
+    "score": 10.647,
+    "old_error": 2.8545251794300497,
+    "new_error": 0.04467891299064766,
+    "ms": 3.494
+   },
+   {
+    "id": "v0079",
+    "batch": "B",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     214,
+     515
+    ],
+    "ref": [
+     214.252,
+     514.832
+    ],
+    "center": [
+     214.16023793816566,
+     514.8988771289587
+    ],
+    "score": 9.454,
+    "old_error": 0.30286630713898655,
+    "new_error": 0.11354658237855444,
+    "ms": 3.828
+   },
+   {
+    "id": "v0080",
+    "batch": "B",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     348,
+     494
+    ],
+    "ref": [
+     344.731,
+     518.685
+    ],
+    "center": [
+     344.8371836692095,
+     518.7263951599598
+    ],
+    "score": 5.612,
+    "old_error": 24.900513769799957,
+    "new_error": 0.1139672359710933,
+    "ms": 3.508
+   },
+   {
+    "id": "v0081",
+    "batch": "B",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     437,
+     468
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.422
+   },
+   {
+    "id": "v0082",
+    "batch": "B",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     348,
+     520
+    ],
+    "ref": [
+     347.45,
+     517.084
+    ],
+    "center": [
+     347.4502774775028,
+     517.0485419407487
+    ],
+    "score": 11.11,
+    "old_error": 2.9674157106816574,
+    "new_error": 0.03545914493653328,
+    "ms": 3.462
+   },
+   {
+    "id": "v0083",
+    "batch": "B",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     150,
+     480
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.391
+   },
+   {
+    "id": "v0084",
+    "batch": "B",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     184,
+     500
+    ],
+    "ref": [
+     183.55,
+     497.084
+    ],
+    "center": [
+     183.47699677944183,
+     497.0433166138828
+    ],
+    "score": 11.271,
+    "old_error": 2.9505179206369805,
+    "new_error": 0.08357396794354703,
+    "ms": 3.532
+   },
+   {
+    "id": "v0085",
+    "batch": "B",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     120,
+     463
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.429
+   },
+   {
+    "id": "v0086",
+    "batch": "B",
+    "visible": false,
+    "accepted": false,
+    "short": true,
+    "start": [
+     240,
+     513
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 4.769
+   },
+   {
+    "id": "v0087",
+    "batch": "B",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     205,
+     512
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.33
+   },
+   {
+    "id": "v0088",
+    "batch": "B",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     158,
+     485
+    ],
+    "ref": [
+     157.679,
+     482.107
+    ],
+    "center": [
+     157.755017593503,
+     482.05196994915605
+    ],
+    "score": 11.625,
+    "old_error": 2.9107541977981994,
+    "new_error": 0.09384551677026459,
+    "ms": 3.4
+   },
+   {
+    "id": "v0089",
+    "batch": "B",
+    "visible": true,
+    "accepted": true,
+    "short": true,
+    "start": [
+     322,
+     534
+    ],
+    "ref": [
+     322.205,
+     531.629
+    ],
+    "center": [
+     322.1085369363427,
+     531.7153550386429
+    ],
+    "score": 11.94,
+    "old_error": 2.379845793323572,
+    "new_error": 0.1294693606578664,
+    "ms": 3.451
+   },
+   {
+    "id": "v0090",
+    "batch": "B",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     151,
+     481
+    ],
+    "ref": [
+     150.534,
+     478.031
+    ],
+    "center": [
+     150.535099953413,
+     478.01475074514747
+    ],
+    "score": 11.429,
+    "old_error": 3.005348066364356,
+    "new_error": 0.01628644162404974,
+    "ms": 3.496
+   },
+   {
+    "id": "v0091",
+    "batch": "B",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     120,
+     462
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.352
+   },
+   {
+    "id": "v0092",
+    "batch": "B",
+    "visible": true,
+    "accepted": true,
+    "short": true,
+    "start": [
+     330,
+     527
+    ],
+    "ref": [
+     329.954,
+     527.092
+    ],
+    "center": [
+     329.994252987206,
+     527.0549285560846
+    ],
+    "score": 11.003,
+    "old_error": 0.10285912696497304,
+    "new_error": 0.05472289222047213,
+    "ms": 3.56
+   },
+   {
+    "id": "v0093",
+    "batch": "B",
+    "visible": true,
+    "accepted": true,
+    "short": true,
+    "start": [
+     237,
+     530
+    ],
+    "ref": [
+     236.938,
+     527.885
+    ],
+    "center": [
+     236.9257022291422,
+     527.9646964929998
+    ],
+    "score": 11.53,
+    "old_error": 2.1159085518991696,
+    "new_error": 0.08063973068245141,
+    "ms": 3.62
+   },
+   {
+    "id": "v0094",
+    "batch": "B",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     389,
+     496
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.475
+   },
+   {
+    "id": "v0095",
+    "batch": "B",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     191,
+     504
+    ],
+    "ref": [
+     190.907,
+     501.533
+    ],
+    "center": [
+     190.9360366910696,
+     501.6217528581619
+    ],
+    "score": 16.456,
+    "old_error": 2.4687523164545935,
+    "new_error": 0.09338200715437207,
+    "ms": 5.555
+   },
+   {
+    "id": "v0096",
+    "batch": "B",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     371,
+     508
+    ],
+    "ref": [
+     365.321,
+     506.893
+    ],
+    "center": [
+     365.25063803792,
+     506.94795314595103
+    ],
+    "score": 11.686,
+    "old_error": 5.785887140275013,
+    "new_error": 0.08927851901588574,
+    "ms": 5.54
+   },
+   {
+    "id": "v0097",
+    "batch": "B",
+    "visible": false,
+    "accepted": false,
+    "short": true,
+    "start": [
+     330,
+     530
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.572
+   },
+   {
+    "id": "v0098",
+    "batch": "B",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     367,
+     509
+    ],
+    "ref": [
+     366.348,
+     506.342
+    ],
+    "center": [
+     366.41124525666237,
+     506.0630216151476
+    ],
+    "score": 18.04,
+    "old_error": 2.7367988599822355,
+    "new_error": 0.2860575146804181,
+    "ms": 3.634
+   },
+   {
+    "id": "v0099",
+    "batch": "B",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     124,
+     465
+    ],
+    "ref": [
+     123.931,
+     462.8
+    ],
+    "center": [
+     123.96502647548914,
+     462.89633852243423
+    ],
+    "score": 11.87,
+    "old_error": 2.201081779489338,
+    "new_error": 0.10217099362843904,
+    "ms": 3.541
+   },
+   {
+    "id": "v0100",
+    "batch": "B",
+    "visible": false,
+    "accepted": false,
+    "short": false,
+    "start": [
+     152,
+     480
+    ],
+    "ref": null,
+    "center": null,
+    "score": null,
+    "old_error": null,
+    "new_error": null,
+    "ms": 3.457
+   },
+   {
+    "id": "v0101",
+    "batch": "B",
+    "visible": true,
+    "accepted": true,
+    "short": true,
+    "start": [
+     230,
+     526
+    ],
+    "ref": [
+     230.417,
+     524.053
+    ],
+    "center": [
+     230.46417260169983,
+     524.0231884289533
+    ],
+    "score": 11.587,
+    "old_error": 1.991154941233859,
+    "new_error": 0.05580308342200676,
+    "ms": 3.513
+   },
+   {
+    "id": "v0102",
+    "batch": "B",
+    "visible": true,
+    "accepted": true,
+    "short": false,
+    "start": [
+     190,
+     503
+    ],
+    "ref": [
+     189.752,
+     500.651
+    ],
+    "center": [
+     189.8681856393814,
+     500.64947205781937
+    ],
+    "score": 10.561,
+    "old_error": 2.362055249142142,
+    "new_error": 0.11619568583115261,
+    "ms": 3.464
+   }
+  ]
+ }
+}
