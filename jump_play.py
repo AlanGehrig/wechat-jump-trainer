@@ -12,6 +12,7 @@ import sys
 import tempfile
 import time
 import zipfile
+from jump_early_landing import ready_pair
 from types import ModuleType
 from ctypes import wintypes as wt
 from datetime import datetime
@@ -154,6 +155,7 @@ class GameWindow:
             if not self.user.ScreenToClient(owner, ctypes.byref(client)):
                 raise RuntimeError("Cannot translate game input coordinates")
             packed = ((client.y & 0xffff) << 16) | (client.x & 0xffff)
+            self.last_press = time.monotonic()
             if not self.user.PostMessageW(owner, 0x0201, 1, packed):
                 raise RuntimeError("Game did not accept mouse-down message")
             start = time.perf_counter()
@@ -175,6 +177,7 @@ class GameWindow:
             self.point(bbox, xy)
             if self.check() != bbox:
                 raise RuntimeError("Window moved before input")
+            self.last_press = time.monotonic()
             self.user.mouse_event(0x0002, 0, 0, 0, 0)
             down = True
             start = time.perf_counter()
@@ -282,21 +285,42 @@ def short_aim(length, direction, counts, enabled=True):
     return stratum, "shorten" if treatment else "control", offset
 
 
-def prior_aim_counts():
+def prior_aim_counts(field="aim_stratum"):
     counts = {}
     for path in (ROOT / "runs").glob("*/events.jsonl"):
         with path.open(encoding="utf-8") as log:
             for line in log:
-                if '"aim_stratum"' not in line:
+                if f'"{field}"' not in line:
                     continue
                 try:
                     row = json.loads(line)
                 except ValueError:
                     continue
-                key = row.get("aim_stratum")
+                key = row.get(field)
                 if key and row.get("event") == "jump":
                     counts[key] = counts.get(key, 0) + 1
     return counts
+
+
+def marker_aim(scene, geometry, kind, wait, counts, enabled):
+    raw, point = scene.get("target"), scene.get("marker_target")
+    if not enabled or raw is None or point is None or geometry is None or kind is not None:
+        return {}
+    direction, length = geometry
+    if (not 110 <= length <= 280 or scene.get("confidence", 0) < .93
+            or scene.get("reason") != "top material outline" or scene.get("marker_updated") is not True):
+        return {}
+    dx, dy = point[0]-raw[0], point[1]-raw[1]
+    if not all(math.isfinite(v) for v in (dx,dy)) or abs(dx) > 6 or abs(dy) > 8:
+        return {}
+    stratum = f"{direction}/{wait}"
+    use_marker = (counts.get(stratum, 0) + int(direction > 0)) % 2 == 1
+    proposed = scene.get("marker_aim_target") or point
+    dx_used = float(np.clip(proposed[0]-raw[0], -2., 2.)) if use_marker else 0.
+    return dict(marker_group="marker_x" if use_marker else "geometry", marker_stratum=stratum,
+                marker_raw_target=list(raw), marker_target=list(point), marker_aim_target=[raw[0]+dx_used, raw[1]],
+                marker_confidence=scene["marker_confidence"], marker_version=scene.get("marker_version"),
+                marker_axis_offset=round(direction*dx_used/2, 4))
 
 
 def aim_duration_delta(length, offset, model, source, base):
@@ -470,13 +494,13 @@ def falling_pawn(frame, target):
     return False
 
 
-def wait_for_landing(game, previous, stop_file, collect):
+def wait_for_landing(game, previous, stop_file, collect, *, delay=1.30):
     release = previous["release"]
     frames = []
-    for offset in ((.22, .50, .85, 1.30) if collect else (1.30,)):
+    for offset in ((.22, .50, .85, delay) if collect else (delay,)):
         while (remaining := release + offset - time.monotonic()) > 0 and not stop_file.exists():
             time.sleep(min(.05, remaining))
-        if stop_file.exists() or offset == 1.30:
+        if stop_file.exists() or offset == delay:
             break
         try:
             shot, _ = game.frame()
@@ -484,6 +508,52 @@ def wait_for_landing(game, previous, stop_file, collect):
             continue
         frames.append((round(time.monotonic() - release, 3), shot))
     return frames
+
+
+def early_observation(game, previous, readers):
+    started = time.monotonic()
+    frame, bbox = game.frame()
+    when = (started + time.monotonic()) / 2 - previous["release"]
+    scores = readers["jump_score"][1]
+    score = scores.read_score(frame)
+    if score is None or score <= previous["score"] or scores.restart_button(frame) is not None:
+        return None
+    # The empty band above the board is clear in established game scenes.
+    band = np.asarray(frame)[252:327:9, 8:-8:8].astype(np.int16)
+    noise = np.abs(band-np.median(band, axis=1, keepdims=True)).max(axis=2)
+    if np.mean(noise > 15) > .025:
+        return None
+    scene = readers["jump_vision"][1].analyze(frame)
+    geom = inspect_geometry(scene)
+    bonus = readers.get("jump_bonus", (None, None))[1]
+    if (not geom or geom[1] < 105 or scene["confidence"] < .93 or bonus is None
+            or bonus.classify_target(frame, scene) is not None):
+        return None
+    return (when, score, scene), (frame, bbox)
+
+
+def landing_trial(game, previous, stop_file, readers, group):
+    """Evaluate identical observations in both arms of the alternating trial."""
+    early = None
+    observations = []
+    for at in (1., 1.12):
+        wait_for_landing(game, previous, stop_file, False, delay=at)
+        if stop_file.exists():
+            break
+        try:
+            observation = early_observation(game, previous, readers)
+        except (RuntimeError, OSError):
+            observation = None
+        if observation is None:
+            break
+        observations.append(observation)
+    passed = len(observations) == 2 and ready_pair(previous["score"], previous["kind"],
+                                                    observations[0][0], observations[1][0])
+    if passed and group == "early":
+        early = observations[-1]
+    else:
+        wait_for_landing(game, previous, stop_file, False)
+    return early, passed
 
 
 def save_failure(previous, jump, landing, result, reason, score):
@@ -610,8 +680,11 @@ def play_rounds(args, output, stop_file, record, training):
     restarting = False
     readers = {}
     aim_counts = prior_aim_counts() if args.short_aim_test else {}
+    marker_counts = prior_aim_counts("marker_stratum") if args.marker_aim_test else {}
     last_base = None
     last_combo, last_combo_is_lower_bound = None, False
+    wait_candidates = 0
+    round_jumps = 0
     while True:
         if stop_file.exists():
             record("stop", reason="stop_requested")
@@ -624,24 +697,50 @@ def play_rounds(args, output, stop_file, record, training):
         bonus_module = readers.get("jump_bonus", (None, None))[1]
         registration_module = readers.get("jump_registration", (None, None))[1]
         model_version, timing_model = readers.get("jump_timing", (None, None))
+        visual_versions = tuple(readers.get(k, (None, None))[0] for k in ("jump_vision", "jump_score", "jump_bonus"))
+        cached = previous.get("next_observation") if previous else None
+        if cached and (previous["visual_versions"] != visual_versions or time.monotonic()-previous["release"] > 1.28):
+            cached = None
+            previous["next_wait"]["wait_applied"] = "normal"
+            wait_for_landing(game, previous, stop_file, False)
         fall_frame = None
         # Allow a missed landing to finish its animation before considering another input.
         for attempt in range(3):
-            frame, bbox = game.frame()
+            reused = cached if attempt == 0 else None
+            frame, bbox = reused[1] if reused else game.frame()
+            if (attempt == 0 and previous and previous["input_wait"]["wait_applied"] == "early"
+                    and previous["score"] is not None and score_module.restart_button(frame) is None
+                    and (score_module.read_score(frame) or 0) <= previous["score"]):
+                # Allow a late positive acknowledgement before treating an unchanged board as unaccepted.
+                wait_for_landing(game, previous, stop_file, False,
+                                 delay=max(1.55, time.monotonic()-previous["release"]+.25))
+                if stop_file.exists():
+                    record("stop", reason="stop_requested")
+                    return
+                reused = None
+                frame, bbox = game.frame()
+            initial_frame = frame
             if attempt == 0 and previous is not None and score_module.restart_button(frame) is None:
                 frame, bbox, landing = measure_landing(game, frame, bbox, previous, score_module.read_score,
                                                        last_base, stop_file, last_combo, last_combo_is_lower_bound)
                 record("landing", jump=jumps, timing=previous["timing"], model_version=previous["version"],
                        aim_group=previous["aim_group"], aim_stratum=previous["aim_stratum"],
-                       aim_offset=previous["aim_offset"], length=round(previous["length"], 3), **landing)
+                       aim_offset=previous["aim_offset"], length=round(previous["length"], 3),
+                       **previous["input_wait"], **previous["marker_aim"], press_after_release=previous["interval"],
+                       input_acknowledged=True if landing["readings"] and previous["score"] is not None else None,
+                       **landing)
                 last_base = landing["base_points"] if landing["combo"] is not None else None
                 last_combo, last_combo_is_lower_bound = landing["combo"], landing["combo_is_lower_bound"]
             if stop_file.exists():
                 record("stop", reason="stop_requested")
                 return
-            scene = analyze(frame)
-            button = score_module.restart_button(frame)
-            score = score_module.read_score(frame)
+            if reused and frame is initial_frame:
+                _, score, scene = reused[0]
+                button = None
+            else:
+                scene = analyze(frame)
+                button = score_module.restart_button(frame)
+                score = score_module.read_score(frame)
             if (previous and button is None and not scene.get("foot") and score is not None
                     and score == previous["score"] and falling_pawn(frame, previous["target"])):
                 fall_frame = frame
@@ -667,7 +766,7 @@ def play_rounds(args, output, stop_file, record, training):
                     record("stop", reason="fall_without_result", score=score, diagnosis=path)
                     return
             target_kind = None
-            if bonus_module and button is None and scene.get("foot"):
+            if not reused and bonus_module and button is None and scene.get("foot"):
                 locate = getattr(bonus_module, "locate_bonus_target", None)
                 if locate is not None:
                     special = locate(frame, scene)
@@ -682,6 +781,12 @@ def play_rounds(args, output, stop_file, record, training):
             if button is not None or geometry is not None or attempt == 2:
                 break
             time.sleep(.55)
+        incoming_wait = previous["next_wait"]["wait_applied"] if previous else "normal"
+        marker = marker_aim(scene, geometry, target_kind, incoming_wait, marker_counts,
+                            args.marker_aim_test and button is None)
+        if scene.get("marker_target") is not None:
+            scene = {**scene, "marker_aim_plan": marker.get("marker_group", "geometry_unchanged"),
+                     "aim_target": marker.get("marker_aim_target", scene.get("target"))}
         sample = f"{jumps:04d}_{'result' if button is not None else 'frame'}"
         if continuous:
             if current.exists():
@@ -703,7 +808,8 @@ def play_rounds(args, output, stop_file, record, training):
             if previous is not None:
                 path = save_failure(previous, jumps, fall_frame if fall_frame is not None else frame,
                                     frame, "round_over", score)
-                record("jump_failure", reason="round_over", jump=jumps, diagnosis=path)
+                record("jump_failure", reason="round_over", jump=jumps, diagnosis=path,
+                       **previous["input_wait"], press_after_release=previous["interval"])
             if not continuous:
                 frame.save(ROOT / "last_result.png")
                 if previous is not None:
@@ -713,12 +819,23 @@ def play_rounds(args, output, stop_file, record, training):
                 return
             game.hold(bbox, button, .045)
             previous, restarting, last_base = None, True, None
+            round_jumps = 0
             last_combo, last_combo_is_lower_bound = 0, False
             corrections.clear()
             record("restart", jump=jumps)
             time.sleep(1.65)
             continue
         restarting = False
+        if (previous and previous["input_wait"]["wait_applied"] == "early" and
+                (score is None or previous["score"] is None or score <= previous["score"])):
+            same = score is not None and score == previous["score"] and scene.get("foot") and scene.get("target") and all(
+                abs((scene["target"][i]-scene["foot"][i])-(previous["target"][i]-previous["foot"][i])) <= 2
+                for i in (0,1))
+            path = save_failure(previous, jumps, frame, None, "early_input_unverified", score)
+            record("stop", reason="early_input_not_accepted" if same else "early_input_unverified",
+                   input_acknowledged=False if same else None, diagnosis=path, **previous["input_wait"],
+                   press_after_release=previous["interval"])
+            return
         if previous is not None and scene.get("foot"):
             before = np.asarray(previous["frame"].convert("L"), dtype=np.int16)[390:790:3, ::3]
             after = np.asarray(frame.convert("L"), dtype=np.int16)[390:790:3, ::3]
@@ -749,7 +866,8 @@ def play_rounds(args, output, stop_file, record, training):
                     quality.update(takeoff_confidence=previous["confidence"], target_reason=previous["reason"],
                                    takeoff_score=before_score, landing_score=score, score_gain=gain,
                                    axis_error_px=round(actual-previous["length"], 3),
-                                   aimed_axis_error_px=round(actual-previous["length"]-previous["aim_offset"], 3))
+                                   aimed_axis_error_px=round(actual-previous["length"]-previous["aim_offset"]
+                                                            -previous["marker_aim"].get("marker_axis_offset", 0.), 3))
                     record("calibration", jump=jumps, actual=round(actual, 1),
                            camera_shift=shift.round(1).tolist(), correction=round(correction, 4),
                            timing=previous["timing"], model_version=previous["version"],
@@ -757,6 +875,7 @@ def play_rounds(args, output, stop_file, record, training):
                            eligible=eligible, quality=quality, held=round(previous["duration"], 6),
                            aim_group=previous["aim_group"], aim_stratum=previous["aim_stratum"],
                            aim_offset=previous["aim_offset"],
+                           **previous["marker_aim"],
                            length=round(previous["length"], 3), foot=previous["foot"],
                            target=previous["target"], landed_foot=scene["foot"], direction=previous["direction"])
                     if eligible:
@@ -779,7 +898,8 @@ def play_rounds(args, output, stop_file, record, training):
         key = (version, model_version if timing == "model" else None)
         aim_stratum, aim_group, aim_offset = short_aim(length, direction, aim_counts, args.short_aim_test)
         time_offset = aim_duration_delta(length, aim_offset, applied_model, timing, base_hold)
-        hold = max(.12, min(1.26, base_hold + time_offset + corrections.get(key, 0.)))
+        marker_time = aim_duration_delta(length, marker.get("marker_axis_offset", 0.), applied_model, timing, base_hold)
+        hold = max(.12, min(1.26, base_hold + time_offset + marker_time + corrections.get(key, 0.)))
         for xy in (scene["foot"], scene["target"]):
             game.point(bbox, xy)
         if stop_file.exists():
@@ -787,21 +907,43 @@ def play_rounds(args, output, stop_file, record, training):
             return
         actual_time = game.hold(bbox, scene["foot"] if continuous else (268, 768), hold)
         released = time.monotonic()
+        input_wait = previous["next_wait"] if previous is not None else dict(
+            wait_group=None, wait_pair_ready=False, wait_applied="normal")
+        interval = round(game.last_press-previous["release"], 4) if previous is not None else None
         jumps += 1
+        round_jumps += 1
         if aim_stratum is not None:
             aim_counts[aim_stratum] = aim_counts.get(aim_stratum, 0) + 1
+        if marker:
+            mk = marker["marker_stratum"]
+            marker_counts[mk] = marker_counts.get(mk, 0) + 1
         record("jump", jump=jumps, length=round(length, 1), direction=direction,
                requested=round(hold, 4), held=round(actual_time, 4), target_kind=target_kind,
                timing=timing, model_version=version, aim_group=aim_group, aim_stratum=aim_stratum,
+               **input_wait, press_after_release=interval,
+               **marker, marker_duration_delta=round(marker_time, 6),
                aim_offset=round(aim_offset, 4), aim_duration_delta=round(time_offset, 6),
                base_duration=round(base_hold, 4), correction=round(corrections.get(key, 0.), 4))
         previous = dict(frame=frame, score=score, foot=scene["foot"], direction=direction,
                         target=scene["target"], length=length, duration=actual_time, kind=target_kind,
                         release=released, timing=timing, timing_key=key, version=version, model=applied_model,
                         aim_group=aim_group, aim_stratum=aim_stratum, aim_offset=round(aim_offset, 4),
-                        confidence=scene.get("confidence"), reason=scene.get("reason"))
+                        confidence=scene.get("confidence"), reason=scene.get("reason"),
+                        input_wait=input_wait, interval=interval, visual_versions=visual_versions, marker_aim=marker)
         suspicious = attempt > 0 or scene.get("confidence", 0) < .90 or "confirmed " in scene.get("reason", "")
-        previous["flight"] = wait_for_landing(game, previous, stop_file, length < 105 or suspicious)
+        previous["next_wait"] = dict(wait_group=None, wait_pair_ready=False, wait_applied="normal")
+        if (continuous and round_jumps >= 2 and wait_candidates < 2*args.early_wait_pairs
+                and not suspicious and scene["confidence"] >= .93 and target_kind is None and score is not None
+                and 110 <= length <= 280):
+            group = "control" if wait_candidates % 2 == 0 else "early"
+            wait_candidates += 1
+            early, passed = landing_trial(game, previous, stop_file, readers, group)
+            previous["flight"] = []
+            previous["next_observation"] = early
+            previous["next_wait"] = dict(wait_group=group, wait_pair_ready=bool(passed),
+                                         wait_applied="early" if early else "normal")
+        else:
+            previous["flight"] = wait_for_landing(game, previous, stop_file, length < 105 or suspicious)
 
 
 if __name__ == "__main__":
@@ -812,11 +954,17 @@ if __name__ == "__main__":
     parser.add_argument("--restart", action="store_true", help="restart only from a recognized result screen")
     parser.add_argument("--no-short-aim-test", dest="short_aim_test", action="store_false",
                         help="use the unmodified calibrated target at every distance")
+    parser.add_argument("--early-wait-pairs", type=int, default=16,
+                        help="number of alternating early/control pairs; 0 keeps the 1.30 s wait")
+    parser.add_argument("--no-marker-aim-test", dest="marker_aim_test", action="store_false",
+                        help="log measured markers but keep the geometric aim on all boards")
     parser.add_argument("--hwnd", type=lambda value: int(value, 0),
                         help="optional game window handle (decimal or 0x-prefixed hex)")
     args = parser.parse_args()
     if args.jumps < 1:
         parser.error("--jumps must be positive")
+    if args.early_wait_pairs < 0:
+        parser.error("--early-wait-pairs must be nonnegative")
     if sys.platform != "win32":
         parser.error("live game control requires Windows")
     try:

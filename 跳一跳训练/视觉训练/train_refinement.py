@@ -75,15 +75,15 @@ def summaries(rows):
                 refined_short_px=stat([r for r in markers if r['short']],'new_error'))
 def main():
     rows=load_annotations()
-    train=[r for r in rows if r['batch'] not in ('B','C','D','E')];dev=[r for r in rows if r['batch']=='B']
+    train=[r for r in rows if r['batch'] in ('历史','A')];dev=[r for r in rows if r['batch']=='B']
     weights=fit(train)
     dst=ROOT/'marker_weights.json'
-    dst.write_text(json.dumps(weights,indent=1),encoding='utf-8')
+    dst.write_text(json.dumps(weights,indent=1),encoding='utf-8',newline='\n')
     model=MarkerRefiner(dst); development=evaluate(model,dev); training=evaluate(model,train)
     # Operate above every false alarm in development and training, with an extra logit margin.
     false_logits=[r['score'] for r in training+development if not r['visible'] and r['score'] is not None]
     weights['min_logit']=round(max(3., max(false_logits,default=-30.)+.7),3)
-    dst.write_text(json.dumps(weights,indent=1),encoding='utf-8');model=MarkerRefiner(dst)
+    dst.write_text(json.dumps(weights,indent=1),encoding='utf-8',newline='\n');model=MarkerRefiner(dst)
     results={name:evaluate(model,group) for name,group in [('train',train),('dev',dev)]}
     result={name:summaries(items) for name,items in results.items()};result['prototype']=weights['prototype'];result['threshold']=weights['min_logit']
     (ROOT/'开发评估.json').write_text(json.dumps(dict(summary=result,details=results),ensure_ascii=False,indent=1),encoding='utf-8')

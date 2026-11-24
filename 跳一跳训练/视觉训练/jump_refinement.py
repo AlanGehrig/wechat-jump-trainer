@@ -26,7 +26,7 @@ def feature_map(patch, prototype):
     # Photometric bandwidths keep both high-contrast coloured faces and
     # white-on-white markers. Each fitted coefficient is learned on local frames.
     features = []
-    for bandwidth in (2.,8.,22.):
+    for bandwidth in (.55,2.,8.,22.):
         similarity = np.exp(-.5*(deviation/bandwidth)**2)
         core = cv2.filter2D(similarity,-1,inner)
         face = cv2.filter2D(similarity,-1,disk)
@@ -56,33 +56,51 @@ class MarkerRefiner:
     def __init__(self, path=None):
         path = Path(path) if path is not None else Path(__file__).with_name('marker_weights.json')
         self.params=json.loads(path.read_text(encoding='utf-8'))
+        self.proto=np.rint(self.params['prototype']).astype(np.int16)
         self.weights=np.array(self.params['weights'],dtype=np.float32)
 
     def predict(self,image,point,origin=(0,0)):
         patch=extract_patch(image,point,origin)
         if patch is None:
             return None
-        features=feature_map(patch,self.params['prototype'])
-        scores=features@self.weights+self.params['intercept']
-        y,x=np.unravel_index(np.argmax(scores),scores.shape)
-        peak=float(scores[y,x])
-        minimum=self.params['min_logit']
-        if peak<minimum or not (1<=x<scores.shape[1]-1 and 1<=y<scores.shape[0]-1):
+        # Use broad colour and size proposals solely to limit computation.
+        # The fitted model decides whether a proposal resembles a real marker
+        # and localizes its center from the original RGB neighbourhood.
+        half=RADIUS+PAD
+        tol=np.max(np.abs(patch.astype(np.int16)-self.proto),axis=2)
+        proposals=[]
+        for level in (0,3):
+            _,_,regions,centers=cv2.connectedComponentsWithStats((tol<=level).astype(np.uint8))
+            for (left,top,width,height,area),center in zip(regions[1:],centers[1:]):
+                if not (8<=width<=30 and 4<=height<=20 and 24<=area<=425):
+                    continue
+                x,y=np.rint(center).astype(int)
+                if max(abs(x-half),abs(y-half))>RADIUS or any(abs(x-u)<4 and abs(y-v)<3 for u,v in proposals):
+                    continue
+                proposals.append((x,y))
+        scored=[]
+        reach=PAD+4
+        for x0,y0 in proposals:
+            if (x0-reach<0 or y0-reach<0 or x0+reach>=patch.shape[1] or y0+reach>=patch.shape[0]):
+                continue
+            tile=patch[y0-reach:y0+reach+1,x0-reach:x0+reach+1]
+            values=feature_map(tile,self.params['prototype'])@self.weights+self.params['intercept']
+            y,x=np.unravel_index(np.argmax(values),values.shape)
+            peak=float(values[y,x])
+            if peak<self.params['min_logit'] or not (1<=x<values.shape[1]-1 and 1<=y<values.shape[0]-1):
+                continue
+            local=values[y-1:y+2,x-1:x+2]
+            prob=np.exp(np.clip(local-peak,-40,0))
+            offset=np.arange(-1,2,dtype=np.float32)
+            px=float(x0+x-4-half+(prob.sum(axis=0)@offset)/prob.sum())
+            py=float(y0+y-4-half+(prob.sum(axis=1)@offset)/prob.sum())
+            if np.hypot(px,py)<=self.params['max_correction_px']:
+                scored.append((peak,px,py))
+        if not scored:
             return None
-        # Reject isolated edges and competing centers. Return subpixel location
-        # from a smooth maximum of the learned local-score surface.
-        lo_y,hi_y=max(0,y-5),min(scores.shape[0],y+6)
-        lo_x,hi_x=max(0,x-7),min(scores.shape[1],x+8)
-        outside=scores.copy()
-        outside[lo_y:hi_y,lo_x:hi_x]=-np.inf
-        if peak-float(outside.max())<self.params['min_gap']:
-            return None
-        small=scores[y-1:y+2,x-1:x+2]
-        prob=np.exp(np.clip(small-peak,-40,0))
-        offset=np.arange(-1,2,dtype=np.float32)
-        px=float(x+(prob.sum(axis=0)@offset)/prob.sum()-RADIUS)
-        py=float(y+(prob.sum(axis=1)@offset)/prob.sum()-RADIUS)
-        if np.hypot(px,py) > self.params['max_correction_px']:
+        scored.sort(reverse=True)
+        peak,px,py=scored[0]
+        if len(scored)>1 and peak-scored[1][0]<self.params['min_gap']:
             return None
         confidence=float(1./(1.+np.exp(-np.clip(peak,-40,40))))
         return dict(center=(float(point[0]+px),float(point[1]+py)),confidence=confidence,

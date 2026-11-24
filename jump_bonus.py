@@ -12,7 +12,10 @@ BONUS_POINTS = {"record_player": 30, "rubiks_cube": 10, "wechat_pay": None}
 
 
 def _regions(mask, low, high):
-    count, _, stats, centers = cv2.connectedComponentsWithStats(mask.astype(np.uint8))
+    binary=mask.view(np.uint8)
+    if cv2.countNonZero(binary)<low:
+        return []
+    count, _, stats, centers = cv2.connectedComponentsWithStats(binary)
     return [(tuple(map(int, stats[i, :4])), tuple(centers[i]))
             for i in range(1, count) if low <= stats[i, 4] <= high]
 
@@ -23,28 +26,32 @@ def _clamp_slice(mask, x, y, w, h):
 
 
 def _centers(rgb):
-    red, green, blue = rgb.astype(np.int16).transpose(2,0,1)
-    gray = np.maximum.reduce([red,green,blue]) - np.minimum.reduce([red,green,blue]) <= 4
+    red,green,blue=cv2.split(rgb.astype(np.int16))
+    gray=(np.maximum(np.maximum(red,green),blue)-np.minimum(np.minimum(red,green),blue))<=4
     # The red and gold stamp is concentric with a gray vinyl record.
     charcoal = gray & (red >= 116) & (red <= 120)
-    stamp = (red > green+27) & (green > blue+5) & (red > 155) & (green < 225) & (blue > 55)
     for (x,y,w,h), _ in _regions(charcoal, 850, 11500):
         if not (52 <= w <= 190 and 0.47 <= h / w <= 0.69):
             continue
         cx, cy = x+(w-1)/2, y+(h-1)/2
-        center_stamp = _clamp_slice(stamp, cx-0.30*w, cy-0.30*h, 0.60*w, 0.60*h)
+        patch = _clamp_slice(rgb,cx-0.30*w,cy-0.30*h,0.60*w,0.60*h)
+        r,g,b=cv2.split(patch.astype(np.int16))
+        center_stamp = (r>g+27)&(g>b+5)&(r>155)&(g<225)&(b>55)
         if center_stamp.size and center_stamp.mean() >= 0.24:
             # The game draws its center marker just above the printed label.
             yield "record_player", cx, cy-0.08*h
 
     # WeChat Pay has a matte silver diamond and a separate green projecting sign.
     silver = gray & (red >= 220) & (red <= 226)
-    sign = (green > red+38) & (green > blue+27) & (green > 120) & (red > 38)
     for (x,y,w,h), _ in _regions(silver, 3900, 30000):
         if not (98 <= w <= 296 and 0.47 <= h/w <= 0.71):
             continue
         cx,cy = x+(w-1)/2, y+(h-1)/2
-        left_sign = _clamp_slice(sign, cx-0.425*w, cy+0.14*h, 0.245*w, 0.47*h)
+        patch=_clamp_slice(rgb,cx-0.425*w,cy+0.14*h,0.245*w,0.47*h)
+        if not patch.size:
+            continue
+        r,g,b=cv2.split(patch.astype(np.int16))
+        left_sign=(g>r+38)&(g>b+27)&(g>120)&(r>38)
         if left_sign.size and left_sign.mean() > 0.28:
             yield "wechat_pay", cx, cy-0.028*h
 
@@ -70,7 +77,10 @@ def locate_bonus_target(frame, scene):
     sx, sy = frame.width/543, frame.height/1029
     if abs(sx/sy-1)>0.055:
         return None
-    rgb = np.asarray(frame.convert("RGB").resize((543,1029), Image.Resampling.BILINEAR))
+    if frame.mode!="RGB":
+        frame=frame.convert("RGB")
+    if frame.size!=(543,1029):
+        frame=frame.resize((543,1029),Image.Resampling.BILINEAR)
     fx, fy = scene["foot"][0]/sx, scene["foot"][1]/sy
     # Slightly below the pawn is retained to capture the corner of a near platform.
     y0, y1 = 260, min(900,round(fy+85))
@@ -78,7 +88,18 @@ def locate_bonus_target(frame, scene):
         return None
     target = scene.get("target")
     matches = []
-    for kind,x,y in _centers(rgb[y0:y1]):
+    x0,x1=0,543
+    if target:
+        tx,ty=target[0]/sx,target[1]/sy
+        # The largest accepted silver face is 296px wide; 180px also includes
+        # its side sign and the full extent of every legal cube/record candidate.
+        x0,x1=max(0,int(tx)-180),min(543,int(tx)+181)
+        y0,y1=max(y0,int(ty)-150),min(y1,int(ty)+180)
+        if x1<=x0 or y1<=y0:
+            return None
+    rgb=np.asarray(frame.crop((x0,y0,x1,y1)))
+    for kind,x,y in _centers(rgb):
+        x += x0
         y += y0
         if y>=fy-24 or abs(x-fx)<32:
             continue

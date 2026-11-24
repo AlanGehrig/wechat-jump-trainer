@@ -76,7 +76,12 @@
  },
  {
   "id": "v0011",
-  "status": "reviewed_no_marker"
+  "status": "reviewed_marker",
+  "ref": [
+   341.918,
+   520.819
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
  },
  {
   "id": "v0012",
@@ -110,7 +115,12 @@
  },
  {
   "id": "v0017",
-  "status": "reviewed_no_marker"
+  "status": "reviewed_marker",
+  "ref": [
+   196.445,
+   504.994
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
  },
  {
   "id": "v0018",
@@ -196,7 +206,12 @@
  },
  {
   "id": "v0031",
-  "status": "reviewed_no_marker"
+  "status": "reviewed_marker",
+  "ref": [
+   107.83,
+   453.86
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
  },
  {
   "id": "v0032",
@@ -279,7 +294,12 @@
  },
  {
   "id": "v0043",
-  "status": "reviewed_no_marker"
+  "status": "reviewed_marker",
+  "ref": [
+   167.798,
+   488.335
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
  },
  {
   "id": "v0044",
@@ -314,7 +334,12 @@
  },
  {
   "id": "v0048",
-  "status": "reviewed_no_marker"
+  "status": "reviewed_marker",
+  "ref": [
+   216.724,
+   516.77
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
  },
  {
   "id": "v0049",
@@ -336,7 +361,12 @@
  },
  {
   "id": "v0051",
-  "status": "reviewed_no_marker"
+  "status": "reviewed_marker",
+  "ref": [
+   132.953,
+   468.345
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
  },
  {
   "id": "v0052",
@@ -362,7 +392,12 @@
  },
  {
   "id": "v0055",
-  "status": "reviewed_no_marker"
+  "status": "reviewed_marker",
+  "ref": [
+   232.206,
+   525.765
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
  },
  {
   "id": "v0056",
@@ -415,7 +450,12 @@
  },
  {
   "id": "v0062",
-  "status": "reviewed_no_marker"
+  "status": "reviewed_marker",
+  "ref": [
+   382.571,
+   497.2
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
  },
  {
   "id": "v0063",
@@ -490,7 +530,12 @@
  },
  {
   "id": "v0072",
-  "status": "reviewed_no_marker"
+  "status": "reviewed_marker",
+  "ref": [
+   179.121,
+   495.063
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
  },
  {
   "id": "v0073",
@@ -579,7 +624,12 @@
  },
  {
   "id": "v0083",
-  "status": "reviewed_no_marker"
+  "status": "reviewed_marker",
+  "ref": [
+   149.5,
+   478.0
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
  },
  {
   "id": "v0084",
@@ -592,7 +642,12 @@
  },
  {
   "id": "v0085",
-  "status": "reviewed_no_marker"
+  "status": "reviewed_marker",
+  "ref": [
+   120.794,
+   461.235
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
  },
  {
   "id": "v0086",
@@ -631,7 +686,12 @@
  },
  {
   "id": "v0091",
-  "status": "reviewed_no_marker"
+  "status": "reviewed_marker",
+  "ref": [
+   119.377,
+   460.617
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
  },
  {
   "id": "v0092",
@@ -653,7 +713,12 @@
  },
  {
   "id": "v0094",
-  "status": "reviewed_no_marker"
+  "status": "reviewed_marker",
+  "ref": [
+   388.925,
+   493.699
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
  },
  {
   "id": "v0095",
@@ -675,7 +740,12 @@
  },
  {
   "id": "v0097",
-  "status": "reviewed_no_marker"
+  "status": "reviewed_marker",
+  "ref": [
+   329.098,
+   528.092
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
  },
  {
   "id": "v0098",
@@ -714,6 +784,742 @@
   "ref": [
    189.752,
    500.651
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0103",
+  "status": "reviewed_marker",
+  "ref": [
+   137.982,
+   471.175
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0104",
+  "status": "reviewed_marker",
+  "ref": [
+   398.5,
+   488.0
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0105",
+  "status": "reviewed_marker",
+  "ref": [
+   437.685,
+   465.02
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0106",
+  "status": "reviewed_marker",
+  "ref": [
+   227.759,
+   522.534
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0107",
+  "status": "reviewed_marker",
+  "ref": [
+   177.066,
+   493.549
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0108",
+  "status": "reviewed_marker",
+  "ref": [
+   137.295,
+   470.447
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0109",
+  "status": "reviewed_marker",
+  "ref": [
+   157.065,
+   482.212
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0110",
+  "status": "reviewed_marker",
+  "ref": [
+   412.872,
+   479.837
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0111",
+  "status": "reviewed_marker",
+  "ref": [
+   119.615,
+   460.092
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0112",
+  "status": "reviewed_no_marker"
+ },
+ {
+  "id": "v0113",
+  "status": "reviewed_no_marker"
+ },
+ {
+  "id": "v0114",
+  "status": "reviewed_marker",
+  "ref": [
+   201.233,
+   507.155
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0115",
+  "status": "reviewed_marker",
+  "ref": [
+   351.687,
+   514.656
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0116",
+  "status": "reviewed_marker",
+  "ref": [
+   243.733,
+   532.18
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0117",
+  "status": "reviewed_marker",
+  "ref": [
+   368.464,
+   505.024
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0118",
+  "status": "reviewed_marker",
+  "ref": [
+   327.068,
+   528.795
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0119",
+  "status": "reviewed_marker",
+  "ref": [
+   406.385,
+   483.092
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0120",
+  "status": "reviewed_marker",
+  "ref": [
+   211.14,
+   513.348
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0121",
+  "status": "reviewed_marker",
+  "ref": [
+   210.708,
+   512.862
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0122",
+  "status": "reviewed_no_marker"
+ },
+ {
+  "id": "v0123",
+  "status": "reviewed_marker",
+  "ref": [
+   226.55,
+   521.916
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0124",
+  "status": "reviewed_marker",
+  "ref": [
+   195.534,
+   504.031
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0125",
+  "status": "reviewed_marker",
+  "ref": [
+   219.736,
+   518.008
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0126",
+  "status": "reviewed_marker",
+  "ref": [
+   362.609,
+   508.211
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0127",
+  "status": "reviewed_marker",
+  "ref": [
+   184.751,
+   498.15
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0128",
+  "status": "reviewed_marker",
+  "ref": [
+   189.423,
+   500.446
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0129",
+  "status": "reviewed_marker",
+  "ref": [
+   338.885,
+   521.962
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0130",
+  "status": "reviewed_marker",
+  "ref": [
+   322.098,
+   532.092
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0131",
+  "status": "reviewed_marker",
+  "ref": [
+   140.257,
+   472.415
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0132",
+  "status": "reviewed_marker",
+  "ref": [
+   158.767,
+   482.845
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0133",
+  "status": "reviewed_marker",
+  "ref": [
+   252.55,
+   536.916
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0134",
+  "status": "reviewed_marker",
+  "ref": [
+   358.2,
+   511.036
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0135",
+  "status": "reviewed_marker",
+  "ref": [
+   188.341,
+   500.03
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0136",
+  "status": "reviewed_marker",
+  "ref": [
+   356.248,
+   512.023
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0137",
+  "status": "reviewed_no_marker"
+ },
+ {
+  "id": "v0138",
+  "status": "reviewed_marker",
+  "ref": [
+   225.872,
+   521.504
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0139",
+  "status": "reviewed_marker",
+  "ref": [
+   142.608,
+   473.285
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0140",
+  "status": "reviewed_marker",
+  "ref": [
+   368.827,
+   505.15
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0141",
+  "status": "reviewed_marker",
+  "ref": [
+   379.932,
+   498.205
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0142",
+  "status": "reviewed_marker",
+  "ref": [
+   432.417,
+   468.053
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0143",
+  "status": "reviewed_marker",
+  "ref": [
+   351.962,
+   514.369
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0144",
+  "status": "reviewed_marker",
+  "ref": [
+   378.938,
+   498.885
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0145",
+  "status": "reviewed_marker",
+  "ref": [
+   360.068,
+   509.795
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0146",
+  "status": "reviewed_marker",
+  "ref": [
+   187.587,
+   499.901
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0147",
+  "status": "reviewed_marker",
+  "ref": [
+   410.454,
+   480.762
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0148",
+  "status": "reviewed_marker",
+  "ref": [
+   406.931,
+   482.8
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0149",
+  "status": "reviewed_no_marker"
+ },
+ {
+  "id": "v0150",
+  "status": "reviewed_marker",
+  "ref": [
+   331.55,
+   526.084
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0151",
+  "status": "reviewed_marker",
+  "ref": [
+   238.583,
+   528.947
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0152",
+  "status": "reviewed_marker",
+  "ref": [
+   407.346,
+   482.4
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0153",
+  "status": "reviewed_no_marker"
+ },
+ {
+  "id": "v0154",
+  "status": "reviewed_no_marker"
+ },
+ {
+  "id": "v0155",
+  "status": "reviewed_marker",
+  "ref": [
+   369.114,
+   504.598
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0156",
+  "status": "reviewed_marker",
+  "ref": [
+   157.385,
+   481.908
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0157",
+  "status": "reviewed_marker",
+  "ref": [
+   226.364,
+   521.822
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0158",
+  "status": "reviewed_marker",
+  "ref": [
+   375.838,
+   500.762
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0159",
+  "status": "reviewed_marker",
+  "ref": [
+   198.214,
+   505.664
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0160",
+  "status": "reviewed_marker",
+  "ref": [
+   379.029,
+   499.194
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0161",
+  "status": "reviewed_marker",
+  "ref": [
+   148.5,
+   476.892
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0162",
+  "status": "reviewed_marker",
+  "ref": [
+   427.315,
+   471.015
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0163",
+  "status": "reviewed_marker",
+  "ref": [
+   195.526,
+   504.411
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0164",
+  "status": "reviewed_marker",
+  "ref": [
+   368.466,
+   504.969
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0165",
+  "status": "reviewed_marker",
+  "ref": [
+   199.5,
+   506.172
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0166",
+  "status": "reviewed_no_marker"
+ },
+ {
+  "id": "v0167",
+  "status": "reviewed_marker",
+  "ref": [
+   345.053,
+   518.556
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0168",
+  "status": "reviewed_marker",
+  "ref": [
+   179.583,
+   494.947
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0169",
+  "status": "reviewed_marker",
+  "ref": [
+   177.241,
+   493.466
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0170",
+  "status": "reviewed_no_marker"
+ },
+ {
+  "id": "v0171",
+  "status": "reviewed_marker",
+  "ref": [
+   379.455,
+   498.583
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0172",
+  "status": "reviewed_marker",
+  "ref": [
+   176.534,
+   493.031
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0173",
+  "status": "reviewed_marker",
+  "ref": [
+   231.315,
+   525.077
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0174",
+  "status": "reviewed_marker",
+  "ref": [
+   326.192,
+   529.185
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0175",
+  "status": "reviewed_marker",
+  "ref": [
+   338.569,
+   522.493
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0176",
+  "status": "reviewed_no_marker"
+ },
+ {
+  "id": "v0177",
+  "status": "reviewed_marker",
+  "ref": [
+   193.626,
+   503.089
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0178",
+  "status": "reviewed_marker",
+  "ref": [
+   417.863,
+   476.298
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0179",
+  "status": "reviewed_marker",
+  "ref": [
+   318.092,
+   534.364
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0180",
+  "status": "reviewed_no_marker"
+ },
+ {
+  "id": "v0181",
+  "status": "reviewed_marker",
+  "ref": [
+   110.143,
+   454.744
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0182",
+  "status": "reviewed_marker",
+  "ref": [
+   337.5,
+   522.892
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0183",
+  "status": "reviewed_marker",
+  "ref": [
+   241.808,
+   530.815
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0184",
+  "status": "reviewed_marker",
+  "ref": [
+   176.833,
+   493.174
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0185",
+  "status": "reviewed_marker",
+  "ref": [
+   191.246,
+   502.041
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0186",
+  "status": "reviewed_marker",
+  "ref": [
+   209.635,
+   512.547
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0187",
+  "status": "reviewed_marker",
+  "ref": [
+   331.03,
+   526.561
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0188",
+  "status": "reviewed_no_marker"
+ },
+ {
+  "id": "v0189",
+  "status": "reviewed_marker",
+  "ref": [
+   250.55,
+   535.916
+  ],
+  "reference": "Visually identified disk; centroid of its measured colour boundary"
+ },
+ {
+  "id": "v0190",
+  "status": "reviewed_no_marker"
+ },
+ {
+  "id": "v0191",
+  "status": "reviewed_marker",
+  "ref": [
+   240.534,
+   530.031
   ],
   "reference": "Visually identified disk; centroid of its measured colour boundary"
  }

@@ -1,0 +1,6 @@
+{"time":"2026-11-25T03:33:08.752","event":"start","jumps":null,"restart":true,"until_stopped":true}
+{"time":"2026-11-25T03:33:08.781","event":"reader_loaded","module":"jump_vision","modified_ns":1795548770582367300,"version":"sha256-ce32fbef5cffe8b5"}
+{"time":"2026-11-25T03:33:08.783","event":"reader_loaded","module":"jump_score","modified_ns":1795544982823623200,"version":"sha256-8a430881c0db66b9"}
+{"time":"2026-11-25T03:33:08.785","event":"reader_loaded","module":"jump_bonus","modified_ns":1795547919854933000,"version":"sha256-dfafe56ae11dec0a"}
+{"time":"2026-11-25T03:33:08.786","event":"reader_loaded","module":"jump_timing","modified_ns":1795547933268182800,"version":"online-20261125-031818-527194"}
+{"time":"2026-11-25T03:33:08.787","event":"reader_loaded","module":"jump_registration","modified_ns":1795547458190582400,"version":"sha256-7c3589773b6c7f4c"}

@@ -1,29 +1,70 @@
 """Locate a resting pawn and the next game platform from a screenshot only."""
+import hashlib
+import math
+from pathlib import Path
+import sys
+import time
+from types import ModuleType
+
 import cv2
 import numpy as np
 from PIL import Image
 
 
-def _background(rgb):
-    # Follow the common colour from row to row. The floor is a smooth vertical gradient.
-    rows = rgb[250:760, 4:-4:3].astype(np.int16)
-    bg = np.zeros((len(rgb), 3), dtype=np.int16)
-    prior = np.median(rows[0], axis=0)
-    for i, row in enumerate(rows):
-        nearby = np.max(np.abs(row - prior), axis=1) < 5
-        if nearby.any():
-            prior = np.median(row[nearby], axis=0)
-        bg[250+i] = prior
+def _background(rgb, stop=760):
+    # Most floor pixels share an exact colour on a row. Estimate candidate
+    # medians in bulk, then check their defining recurrence in scan order.
+    rows = np.ascontiguousarray(rgb[250:stop, 4:-4:3].transpose(0,2,1)).astype(np.int16)
+    bg = np.zeros((len(rgb),3),dtype=np.int16)
+    first = np.median(rows[0],axis=1)
+    coarse = np.median(rows[:,:,::8],axis=2)
+    guesses = np.vstack((first,coarse[:-1]))
+    prior = first
+    for iteration in range(2):
+        limits = guesses[:,:,None]
+        near = ((rows>limits-5) & (rows<limits+5)).all(axis=1)
+        counts = near.sum(axis=1)
+        sorted_pixels = np.sort(np.where(near[:,None,:], rows, 256),axis=2)
+        index = np.arange(len(rows))[:,None]
+        channels = np.arange(3)[None,:]
+        left = np.maximum(0,counts-1)//2
+        right = counts//2
+        medians = (sorted_pixels[index,channels,left[:,None]]+
+                   sorted_pixels[index,channels,right[:,None]])*.5
+        medians[counts==0] = guesses[counts==0]
+        if iteration == 0:
+            guesses = np.vstack((first,medians[:-1]))
+    # An unverified proposal can arise when a wide platform covers most of
+    # a row. Recalculate that one from its exact predecessor.
+    matches = np.all(guesses[1:]==medians[:-1],axis=1)
+    bg[250:stop] = medians
+    k=1
+    while k<len(rows):
+        bad = np.flatnonzero(~matches[k-1:])
+        if not len(bad):
+            break
+        k += int(bad[0])
+        prior=medians[k-1]
+        while k<len(rows) and not np.array_equal(prior,guesses[k]):
+            r=rows[k]
+            valid=np.all((r>prior[:,None]-5)&(r<prior[:,None]+5),axis=0)
+            if valid.any():
+                prior=np.median(r[:,valid],axis=1)
+            medians[k]=prior
+            bg[250+k]=prior
+            k+=1
+        if k<len(rows):
+            k+=1
     return bg
 
 
 def _pawn(rgb):
-    r, g, b = rgb.astype(np.int16).transpose(2, 0, 1)
+    r,g,b = cv2.split(rgb[365:800].astype(np.int16))
     mask = (b-r > 8) & (b-g > 6) & (r < 115) & (g < 110) & (b < 155)
-    mask[:365] = False
-    mask[800:] = False
     _, _, stats, _ = cv2.connectedComponentsWithStats(mask.astype(np.uint8))
-    pieces = stats[1:].tolist()
+    pieces = stats[1:].copy()
+    pieces[:,1] += 365
+    pieces = pieces.tolist()
     for x, y, w, h, area in sorted(pieces, key=lambda p: -p[-1]):
         if not (27 <= w <= 47 and 45 <= h <= 78 and 800 <= area <= 3300):
             continue
@@ -41,16 +82,23 @@ def _top_face(rgb, foreground, tip, foot):
     # case of printed designs. Its aspect ratio checks diamond and round tops.
     roi_top = max(255, ty-2)
     roi_end = min(760, ty+150, foot[1]+12)
-    roi = rgb[roi_top:roi_end].astype(np.int16)
+    roi = rgb[roi_top:roi_end]
+    seen = {}
     candidates = []
     for dx, dy in [(0, 5), (0, 11), (-3, 17), (4, 21)]:
         sx, sy = int(np.clip(tx+dx, 3, 539)), ty+dy-roi_top
         if sy >= len(roi) or not foreground[roi_top+sy, sx]:
             continue
-        mat = np.max(np.abs(roi-roi[sy,sx]),axis=2) <= 8
-        mat &= foreground[roi_top:roi_end]
-        mat = cv2.morphologyEx(mat.astype(np.uint8), cv2.MORPH_CLOSE, np.ones((3,3),np.uint8))
-        _, labels, stats, _ = cv2.connectedComponentsWithStats(mat)
+        color=tuple(map(int,roi[sy,sx]))
+        if color not in seen:
+            lower=tuple(max(0,c-8) for c in color)
+            upper=tuple(min(255,c+8) for c in color)
+            mat = cv2.inRange(roi,lower,upper)
+            mat &= foreground[roi_top:roi_end].view(np.uint8)
+            mat = cv2.morphologyEx(mat,cv2.MORPH_CLOSE,np.ones((3,3),np.uint8))
+            _,labels,stats,_ = cv2.connectedComponentsWithStats(mat)
+            seen[color]=(labels,stats)
+        labels,stats=seen[color]
         lab = labels[sy,sx]
         if not lab:
             continue
@@ -112,8 +160,8 @@ def _ring_top(rgb, fg, tip):
     tx, ty = tip
     # A silver pillar has concentric bright, dark, then bright ellipses.
     # The nested contours preserve its geometric centre even on a tiny top.
-    x0,x1=max(4,tx-65),min(539,tx+66)
-    y0,y1=max(255,ty-2),min(len(rgb),ty+78)
+    x0,x1=max(4,tx-82),min(539,tx+83)
+    y0,y1=max(255,ty-2),min(len(rgb),ty+94)
     roi=rgb[y0:y1,x0:x1].astype(np.int16)
     bright=(roi.min(axis=2)>=231) & (np.ptp(roi,axis=2)<=8) & fg[y0:y1,x0:x1]
     contours,links=cv2.findContours(bright.astype(np.uint8),cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
@@ -127,7 +175,7 @@ def _ring_top(rgb, fg, tip):
         if core<0:
             continue
         x,y,w,h=cv2.boundingRect(outer)
-        if not (25<=w<=120 and .40<=h/w<=.71 and abs(ty-y0-y)<=5):
+        if not (25<=w<=150 and .40<=h/w<=.71 and abs(ty-y0-y)<=5):
             continue
         cx,cy=x+(w-1)/2,y+(h-1)/2
         ix,iy,iw,ih=cv2.boundingRect(contours[core])
@@ -227,6 +275,96 @@ def _silhouette(fg, tip, foot):
     return None
 
 
+# Optional local model: the public target stays geometric, while matched marks
+# are separate observations for a controller's explicit horizontal-only trial.
+_MARKER_ROOT = Path(__file__).resolve().parent / "跳一跳训练" / "视觉训练"
+_MARKER_CACHE = {"next_check": 0., "stamp": None, "model": None, "version": None}
+_MARKER_METHOD = "local_fitted_marker"
+
+
+def _marker_model():
+    cache = _MARKER_CACHE
+    when = time.monotonic()
+    if when >= cache["next_check"]:
+        cache["next_check"] = when + 2.
+        try:
+            code = _MARKER_ROOT / "jump_refinement.py"
+            params = _MARKER_ROOT / "marker_weights.json"
+            files = (code, params)
+            stamp = tuple((st.st_mtime_ns, st.st_size) for st in (f.stat() for f in files))
+            if stamp != cache["stamp"]:
+                source, weights = (f.read_bytes() for f in files)
+                mod = ModuleType("_own_jump_marker")
+                mod.__file__ = str(code)
+                exec(compile(source, str(code), "exec"), mod.__dict__)
+                model = mod.MarkerRefiner(params)
+                if (not np.isfinite(model.weights).all() or not model.weights.size or
+                        weights != params.read_bytes()):
+                    raise ValueError("Incomplete marker update")
+                version = ("marker-" + hashlib.sha256(weights).hexdigest()[:16] + "-" +
+                           hashlib.sha256(source).hexdigest()[:12])
+                cache.update(stamp=stamp, model=model, version=version)
+        except (OSError, ValueError, KeyError, ImportError, AttributeError, SyntaxError):
+            # A previous complete version can serve during a two-file update.
+            pass
+    return cache["model"], cache["version"]
+
+
+def _scene(foot, target, confidence, reason):
+    return dict(foot=foot, target=target, confidence=confidence, reason=reason,
+                geometry_target=target, marker_target=None, marker_aim_target=None,
+                marker_confidence=None, marker_logit=None, marker_method=None,
+                marker_version=None, marker_updated=False, marker_status="ineligible_geometry")
+
+
+def _annotate_marker(scene, rgb, canonical_frame, point, sx, sy):
+    if scene["reason"] != "top material outline" or scene["confidence"] < .93:
+        return scene
+    model, version = _marker_model()
+    scene.update(marker_method=_MARKER_METHOD, marker_version=version)
+    if model is None:
+        scene["marker_status"] = "model_unavailable"
+        return scene
+    try:
+        # The learned filters are applied once to this ROI in canonical coordinates.
+        match = model.predict(rgb, point)
+    except (ValueError, TypeError, ArithmeticError, IndexError, cv2.error):
+        scene["marker_status"] = "model_abstained"
+        return scene
+    if not match:
+        scene["marker_status"] = "no_reliable_marker"
+        return scene
+    mx, my = match["center"]
+    dx, dy = mx-point[0], my-point[1]
+    confidence, logit = match["confidence"], match["logit"]
+    if not all(math.isfinite(v) for v in (mx,my,confidence,logit)):
+        scene["marker_status"] = "model_abstained"
+        return scene
+    scene.update(marker_confidence=round(confidence,7), marker_logit=logit)
+    if (not (4<=mx<=538 and 270<=my<760) or abs(dx)>12 or abs(dy)>9 or
+            math.hypot(dx,dy)>15):
+        scene["marker_status"] = "geometry_disagreement"
+        return scene
+    # The game runner puts its live bonus reader in sys.modules. Use its
+    # classification also when a decorated block superficially looks ordinary.
+    try:
+        bonus = sys.modules.get("jump_bonus")
+        if bonus is None:
+            import jump_bonus as bonus
+        canonical_scene = dict(scene, foot=(scene["foot"][0]/sx,scene["foot"][1]/sy),
+                               target=point)
+        if bonus.locate_bonus_target(canonical_frame,canonical_scene) is not None:
+            scene["marker_status"] = "special_platform"
+            return scene
+    except (ImportError, AttributeError, ValueError, TypeError, cv2.error):
+        scene["marker_status"] = "platform_type_unverified"
+        return scene
+    mx, my = round(mx*sx,3), round(my*sy,3)
+    scene.update(marker_target=(mx,my), marker_aim_target=(mx,scene["geometry_target"][1]),
+                 marker_status="accepted", marker_updated=True)
+    return scene
+
+
 def analyze(frame):
     """Return foot and target coordinates in original pixels, confidence and reason."""
     if not isinstance(frame, Image.Image):
@@ -234,18 +372,25 @@ def analyze(frame):
     ow, oh = frame.size
     sx, sy = ow/543, oh/1029
     if abs(sx/sy-1)>.14:
-        return dict(foot=None,target=None,confidence=0.,reason='unexpected full-window aspect ratio')
-    rgb = np.asarray(frame.convert('RGB').resize((543,1029),Image.Resampling.BILINEAR))
+        return _scene(foot=None,target=None,confidence=0.,reason='unexpected full-window aspect ratio')
+    if frame.mode!='RGB':
+        frame=frame.convert('RGB')
+    if frame.size!=(543,1029):
+        frame=frame.resize((543,1029),Image.Resampling.BILINEAR)
+    rgb=np.asarray(frame)
     pawn = _pawn(rgb)
     if not pawn:
-        return dict(foot=None,target=None,confidence=0.,reason='resting pawn body and head not found')
+        return _scene(foot=None,target=None,confidence=0.,reason='resting pawn body and head not found')
     foot, bbox = pawn
     def mapped(pt):
         return (round(pt[0]*sx), round(pt[1]*sy))
-    bg = _background(rgb)
-    foreground = np.max(np.abs(rgb.astype(np.int16)-bg[:,None,:]),axis=2)>12
-    foreground[:270]=False
-    foreground[foot[1]-20:]=False
+    stop=foot[1]-20
+    bg = _background(rgb, min(stop,760))
+    foreground = np.zeros(rgb.shape[:2], dtype=bool)
+    band=rgb[270:stop]
+    row_colors=np.broadcast_to(bg[270:stop,None,:].astype(np.uint8),band.shape)
+    diff=cv2.absdiff(band,np.ascontiguousarray(row_colors))
+    foreground[270:stop]=cv2.inRange(diff,(0,0,0),(12,12,12))==0
     foreground[:,:4]=False
     foreground[:,539:]=False
     x0,y0,x1,y1=bbox
@@ -267,7 +412,7 @@ def analyze(frame):
             continue
         tips.append((y,tipx))
     if not tips:
-        return dict(foot=mapped(foot),target=None,confidence=0.,reason='no upper platform contour')
+        return _scene(foot=mapped(foot),target=None,confidence=0.,reason='no upper platform contour')
     for y,tx in sorted(tips):
         if y <= 272:
             continue
@@ -279,5 +424,7 @@ def analyze(frame):
             conf, cx, cy, reason=candidate
             if cy >= foot[1]-18:
                 continue
-            return dict(foot=mapped(foot),target=mapped((cx,cy)),confidence=round(conf,3),reason=reason)
-    return dict(foot=mapped(foot),target=None,confidence=0.,reason='ambiguous or decorated platform outline')
+            candidate=(int(round(cx)),int(round(cy)))
+            scene=_scene(foot=mapped(foot),target=mapped((cx,cy)),confidence=round(conf,3),reason=reason)
+            return _annotate_marker(scene,rgb,frame,candidate,sx,sy)
+    return _scene(foot=mapped(foot),target=None,confidence=0.,reason='ambiguous or decorated platform outline')

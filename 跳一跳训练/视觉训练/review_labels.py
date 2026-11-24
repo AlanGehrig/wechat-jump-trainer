@@ -29,13 +29,17 @@ def make_annotations(positive_ids, reviewed):
         cx,cy=np.array(row['coarse'])-row['original_box'][:2]
         x0,y0=cx-42,cy-37
         patch=img[y0:cy+38,x0:cx+43]
-        mask=(np.max(np.abs(patch-245),axis=2)<=3).astype(np.uint8)
-        n,lab,st,ct=cv2.connectedComponentsWithStats(mask)
         options=[]
-        for idx,(x,y,w,h,area) in enumerate(st[1:],1):
-            if 13<=w<=24 and 7<=h<=15 and .43<=h/w<=.73 and .61<=area/(h*w)<=.95:
-                u,v=ct[idx]
-                options.append([round(u+x0+row['original_box'][0],3),round(v+y0+row['original_box'][1],3)])
+        for tolerance in (3,1,0):
+            mask=(np.max(np.abs(patch-245),axis=2)<=tolerance).astype(np.uint8)
+            _,lab,st,ct=cv2.connectedComponentsWithStats(mask)
+            options=[]
+            for idx,(x,y,w,h,area) in enumerate(st[1:],1):
+                if 13<=w<=22 and 7<=h<=14 and .43<=h/w<=.76 and .57<=area/(h*w)<=.96:
+                    u,v=ct[idx]
+                    options.append([round(u+x0+row['original_box'][0],3),round(v+y0+row['original_box'][1],3)])
+            if len(options)==1:
+                break
         if len(options)==1:
             labels.append(dict(id=row['id'],status='reviewed_marker',ref=options[0],
                                reference='Visually identified disk; centroid of its measured colour boundary'))

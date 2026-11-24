@@ -1,0 +1,8 @@
+{"time":"2026-11-25T03:29:19.778","event":"start","jumps":null,"restart":true,"until_stopped":true}
+{"time":"2026-11-25T03:29:19.809","event":"reader_loaded","module":"jump_vision","modified_ns":1795548354390535100,"version":"sha256-a9338d69eae62879"}
+{"time":"2026-11-25T03:29:19.811","event":"reader_loaded","module":"jump_score","modified_ns":1795544982823623200,"version":"sha256-8a430881c0db66b9"}
+{"time":"2026-11-25T03:29:19.814","event":"reader_loaded","module":"jump_bonus","modified_ns":1795547919854933000,"version":"sha256-dfafe56ae11dec0a"}
+{"time":"2026-11-25T03:29:19.815","event":"reader_loaded","module":"jump_timing","modified_ns":1795547933268182800,"version":"online-20261125-031818-527194"}
+{"time":"2026-11-25T03:29:19.817","event":"reader_loaded","module":"jump_registration","modified_ns":1795547458190582400,"version":"sha256-7c3589773b6c7f4c"}
+{"time":"2026-11-25T03:29:21.074","event":"observe","jump":0,"score":45,"button":null,"scene":{"foot":[371,612],"target":null,"confidence":0.0,"reason":"ambiguous or decorated platform outline","geometry_target":null,"marker_target":null,"marker_aim_target":null,"marker_confidence":null,"marker_logit":null,"marker_method":null,"marker_version":null,"marker_updated":false,"marker_status":"ineligible_geometry"}}
+{"time":"2026-11-25T03:29:21.075","event":"stop","reason":"uncertain_geometry","scene":{"foot":[371,612],"target":null,"confidence":0.0,"reason":"ambiguous or decorated platform outline","geometry_target":null,"marker_target":null,"marker_aim_target":null,"marker_confidence":null,"marker_logit":null,"marker_method":null,"marker_version":null,"marker_updated":false,"marker_status":"ineligible_geometry"}}
